@@ -1,32 +1,22 @@
 name: Deploy Website
 
 on:
-  push:
-    branches:
-      - main
-
+  pull_request:
+    branches: [ "main" ]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 
 jobs:
-  build-website:
-    name: Build Website
-    uses: ./.github/workflows/build-website.yml
-
   deploy-website:
     name: Deploy Website
-
-    needs: build-website
 
     runs-on: ubuntu-latest
 
@@ -34,10 +24,37 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
-
     steps:
-      - name: 🎛 Setup Pages
-        uses: actions/configure-pages@v5
+      - name: 🛎 Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      # Setup PNPM
+      - name: 🟨 Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      # Configure Node and caching
+      - name: 🟩 Setup Node.js and caching
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: 'pnpm'
+
+      # Install dependencies
+      - name: 📦 Install
+        run: pnpm install
+
+      - name: 🔨 Build
+        run: pnpm build
+
+      # Upload artifact if requested
+      - name: ⬆️ Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist'
 
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
