@@ -1,0 +1,59 @@
+name: Deploy Website
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  deploy-website:
+    name: Deploy Website
+
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 🛎 Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: 🟨 Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: 🟩 Setup Node.js and caching
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: 'pnpm'
+
+      # Install dependencies
+      - name: 📦 Install
+        run: pnpm install
+
+      - name: 🔨 Build
+        run: pnpm build
+
+      # Upload artifact if requested
+      - name: ⬆️ Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist'
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
