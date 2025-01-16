@@ -30,13 +30,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      # Setup PNPM
       - name: 🟨 Setup PNPM
         uses: pnpm/action-setup@v4
         with:
           version: latest
 
-      # Configure Node and caching
       - name: 🟩 Setup Node.js and caching
         uses: actions/setup-node@v4
         with:
