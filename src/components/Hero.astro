@@ -9,13 +9,13 @@ const {graphicSrc} = Astro.props
     <div class="hero-content flex-col lg:flex-row-reverse">
         <!-- Graphics side. -->
         <div class="basis-2/5 self-stretch">
-            <div class="aspect-video sticky top-1/2 -translate-y-1/2 border flex justify-center items-center">
+            <div class="h-dvh sticky top-0 border flex justify-center items-center">
                 <p class="p-8">{graphicSrc}</p>
             </div>
         </div>
 
         <!-- Content side. -->
-        <div class="basis-3/5col">
+        <div class="basis-1/2">
             <slot/>
         </div>
     </div>

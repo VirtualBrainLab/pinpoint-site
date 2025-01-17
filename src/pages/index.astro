@@ -8,10 +8,12 @@ import Layout from "../layouts/Layout.astro";
     <!-- Pinpoint Intro Sequence. -->
 
     <Hero graphicSrc="[Image: human atlas (solid, should look like a brain)] [Insert multiple probes with planned routes and highlighted regions] [Remove probes, exploded brain view, highlight various regions on scroll]">
-        <div class="border flex justify-center items-center h-dvh">
+
+        <!-- Titles. -->
+        <div class="flex justify-center items-center h-dvh">
             <div class="flex-col">
                 <Article>
-                    <h1>Pinpoint</h1>
+                    <h1 class="text-primary">Pinpoint</h1>
                     <h3>Interactive 3D visualization and automation tools for human neuroscience research and
                         neurosurgery.</h3>
                 </Article>
@@ -20,30 +22,31 @@ import Layout from "../layouts/Layout.astro";
 
                 <div>
                     <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
-                    <a class="btn" href="#about">Learn More</a>
+                    <a class="btn" href="#goal">Learn More</a>
                 </div>
             </div>
         </div>
-        <div class="border h-1/2dvh">
-            <div class="sticky top-1/2 -translate-y-1/2">
-                <Article>
-                    <h2 id="about" class="sticky">Pinpoint aims to advance large-scale neuroscience research with intuitive
-                        browser-based
-                        planning and
-                        automation
-                        tools for efficient and reproducible neurosurgery.</h2>
-                </Article>
-            </div>
+
+        <!-- Goal. -->
+        <div>
+            <span class="anchor" id="goal"></span>
+            <Article>
+                <h1>Pinpoint aims to advance large-scale neuroscience research with
+                    intuitive browser-based planning and automation tools for efficient and reproducible
+                    neurosurgery.
+                </h1>
+            </Article>
         </div>
-        <div class="border h-1/2dvh">
+
+        <!-- Problem statement. -->
+        <div class="flex justify-center items-center h-dvh">
             <Article>
                 <h2>Human behavior engage multiple regions of the brain.</h2>
-                <h3>Current tools are designed to study individual brain regions, depend on manual input, and require
-                    extensive expertise ot operate.</h3>
-                <p>Modern neuroscientists need tools that enable the study of the whole brain to better understand human
-                    behavior
-                    and
-                    cure neurodegenerative diseases that affect the whole brain like Parkinson's and Alzheimer's.</p>
+                <h3>Current tools are designed to study individual brain regions, depend on manual input, and
+                    require extensive expertise ot operate.</h3>
+                <p>Modern neuroscientists need tools that enable the study of the whole brain to better understand
+                    human behavior and cure neurodegenerative diseases that affect the whole brain like Parkinson's
+                    and Alzheimer's.</p>
             </Article>
         </div>
     </Hero>
@@ -105,3 +108,12 @@ import Layout from "../layouts/Layout.astro";
     </Hero>
 
 </Layout>
+
+<style>
+    .anchor {
+        display: block;
+        height: 45dvh;
+        margin-top: -45dvh;
+        visibility: hidden;
+    }
+</style>
