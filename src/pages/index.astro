@@ -31,9 +31,8 @@ import Layout from "../layouts/Layout.astro";
         <div>
             <span class="anchor" id="goal"></span>
             <Article>
-                <h1>Pinpoint aims to advance large-scale neuroscience research with
-                    intuitive browser-based planning and automation tools for efficient and reproducible
-                    neurosurgery.
+                <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based planning and
+                    automation tools for efficient and reproducible neurosurgery.
                 </h1>
             </Article>
         </div>
@@ -54,59 +53,47 @@ import Layout from "../layouts/Layout.astro";
     <!-- Planning Phase. -->
 
     <!-- FIXME: This says "experiments" instead of surgery... do we want that? -->
-    <Hero graphicSrc="Move brain back to the center">
-        <Article>
-            <h1>Plan Your Next Experiment</h1>
-        </Article>
+    <Hero graphicSrc="[Move brain back to the center], [Scroll through various probe 3d models; left to right with labels, rat tetrode array, use nanoject for viral injector], [Insert 1-shank neuro pixel probe vertically, bring in channel map, show coordinates in the corner, consider mouse brain]">
+        <div class="top-0 h-1/2dvh">
+            <Article>
+                <h1>Plan Your Next Experiment in Pinpoint</h1>
+            </Article>
+        </div>
+
+        <div class="top-0 h-dvh">
+            <Article>
+                <h2>Simulate your lab</h2>
+                <h3>Use Neuropixel probes, viral injectors, and 2-photon lasers</h3>
+            </Article>
+        </div>
+
+        <div class="top-0 h-dvh">
+            <Article>
+                <h2>View your plan in 3D</h2>
+            </Article>
+        </div>
     </Hero>
-
-    <br/>
-
-    <Hero graphicSrc="Scroll through various probe 3d models; left to right with labels, rat tetrode array, use nanoject for viral injector">
-        <Article>
-            <h2>Simulate your lab</h2>
-            <h3>Use Neuropixel probes, viral injectors, and 2-photon lasers</h3>
-        </Article>
-    </Hero>
-
-    <br/>
-
-    <Hero graphicSrc="Insert 1-shank neuro pixel probe vertically, bring in channel map, show coordinates in the corner, consider mouse brain">
-        <Article>
-            <h2>View your plan in 3D</h2>
-        </Article>
-    </Hero>
-
-    <br/>
 
     <!-- Automation Phase -->
-    <!-- FIXME: This is demonstrating the end product, not what we have now. -->
+    <Hero graphicSrc="[Probes fade into insertion lines], [Draw plan lines from probes off screen on scroll], [From off screen, probes move in while following the plan lines]">
+        <div class="top-0 h-1/2dvh">
+            <Article>
+                <h1>Automate Your Experiment</h1>
+            </Article>
+        </div>
 
-    <Hero graphicSrc="Probes fade into insertion lines">
-        <Article>
-            <h1>Automate Your Experiment</h1>
-            <h3>Beta</h3>
-        </Article>
+        <div class="top-0 h-dvh">
+            <Article>
+                <h2>Robot-assisted surgeries.</h2>
+            </Article>
+        </div>
+
+        <div class="top-0 h-dvh">
+            <Article>
+                <h2>Future: Complete Automation</h2>
+            </Article>
+        </div>
     </Hero>
-
-    <br/>
-
-    <Hero graphicSrc="Draw plan lines from probes off screen on scroll">
-        <Article>
-            <h2>Automatically generate plans...</h2>
-        </Article>
-    </Hero>
-
-
-    <br/>
-
-    <!-- FIXME: Should we have a segment demonstrating how slow this would take for individual probes? -->
-    <Hero graphicSrc="From off screen, probes move in while following the plan lines">
-        <Article>
-            <h2>... and run them in parallel</h2>
-        </Article>
-    </Hero>
-
 </Layout>
 
 <style>
