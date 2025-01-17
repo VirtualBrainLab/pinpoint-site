@@ -1,0 +1,10 @@
+---
+interface Props {
+    fullScreen?: boolean;
+}
+
+const {fullScreen = false} = Astro.props
+---
+<article class={`prose ${fullScreen ? "h-dvh" : ""}`}>
+    <slot/>
+</article>

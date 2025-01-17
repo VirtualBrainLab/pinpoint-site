@@ -1,16 +1,22 @@
 ---
 import Hero from "../components/Hero.astro";
-import Prose from "../components/Prose.astro";
+import Article from "../components/Article.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
+    <!-- Pinpoint Intro Sequence. -->
+
+    <div class="hero">
+
+    </div>
+
     <Hero graphicSrc="Image: human atlas (solid, should look like a brain)">
-        <Prose>
+        <Article fullScreen={true}>
             <h1>Pinpoint</h1>
             <h3>Interactive 3D visualization and automation tools for human neuroscience research and
                 neurosurgery.</h3>
-        </Prose>
+        </Article>
 
         <br/>
 
@@ -23,19 +29,19 @@ import Layout from "../layouts/Layout.astro";
     <br/>
 
     <Hero graphicSrc="Insert multiple probes with planned routes and highlighted regions">
-        <Prose>
+        <Article>
             <h2 id="about" class="sticky">Pinpoint aims to advance large-scale neuroscience research with intuitive
                 browser-based
                 planning and
                 automation
                 tools for efficient and reproducible neurosurgery.</h2>
-        </Prose>
+        </Article>
     </Hero>
 
     <br/>
 
     <Hero graphicSrc="Remove probes, exploded brain view, highlight various regions on scroll">
-        <Prose>
+        <Article>
             <h2>Human behavior engage multiple regions of the brain.</h2>
             <h3>Current tools are designed to study individual brain regions, depend on manual input, and require
                 extensive expertise ot operate.</h3>
@@ -43,7 +49,7 @@ import Layout from "../layouts/Layout.astro";
                 behavior
                 and
                 cure neurodegenerative diseases that affect the whole brain like Parkinson's and Alzheimer's.</p>
-        </Prose>
+        </Article>
     </Hero>
 
     <br/>
@@ -52,26 +58,26 @@ import Layout from "../layouts/Layout.astro";
 
     <!-- FIXME: This says "experiments" instead of surgery... do we want that? -->
     <Hero graphicSrc="Move brain back to the center">
-        <Prose>
+        <Article>
             <h1>Plan Your Next Experiment</h1>
-        </Prose>
+        </Article>
     </Hero>
 
     <br/>
 
     <Hero graphicSrc="Scroll through various probe 3d models; left to right with labels, rat tetrode array, use nanoject for viral injector">
-        <Prose>
+        <Article>
             <h2>Simulate your lab</h2>
             <h3>Use Neuropixel probes, viral injectors, and 2-photon lasers</h3>
-        </Prose>
+        </Article>
     </Hero>
 
     <br/>
 
     <Hero graphicSrc="Insert 1-shank neuro pixel probe vertically, bring in channel map, show coordinates in the corner, consider mouse brain">
-        <Prose>
+        <Article>
             <h2>View your plan in 3D</h2>
-        </Prose>
+        </Article>
     </Hero>
 
     <br/>
@@ -80,18 +86,18 @@ import Layout from "../layouts/Layout.astro";
     <!-- FIXME: This is demonstrating the end product, not what we have now. -->
 
     <Hero graphicSrc="Probes fade into insertion lines">
-        <Prose>
+        <Article>
             <h1>Automate Your Experiment</h1>
             <h3>Beta</h3>
-        </Prose>
+        </Article>
     </Hero>
 
     <br/>
 
     <Hero graphicSrc="Draw plan lines from probes off screen on scroll">
-        <Prose>
+        <Article>
             <h2>Automatically generate plans...</h2>
-        </Prose>
+        </Article>
     </Hero>
 
 
@@ -99,9 +105,9 @@ import Layout from "../layouts/Layout.astro";
 
     <!-- FIXME: Should we have a segment demonstrating how slow this would take for individual probes? -->
     <Hero graphicSrc="From off screen, probes move in while following the plan lines">
-        <Prose>
+        <Article>
             <h2>... and run them in parallel</h2>
-        </Prose>
+        </Article>
     </Hero>
 
 </Layout>
