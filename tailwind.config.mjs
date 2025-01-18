@@ -6,7 +6,11 @@ import { dark } from "daisyui/src/theming/themes";
 export default {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
-		extend: {},
+		extend: {
+			height: {
+				"1/2dvh": "50dvh",
+			},
+		},
 	},
 	plugins: [typography, daisyui],
 
