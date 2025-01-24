@@ -1,5 +1,4 @@
 ---
-import type { ImageMetadata } from "astro";
 import Article from "../components/Article.astro";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
@@ -120,8 +119,10 @@ import Layout from "../layouts/Layout.astro";
 </style>
 
 <script>
-    // Import images.
-    const imageImports = import.meta.glob<{ default: ImageMetadata }>("/src/assets/intro/*.webp");
+    import type {ImageMetadata} from "astro";
+
+    // Collect images.
+    const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/intro/*.webp");
 
     // Get components.
     const html = document.documentElement;
@@ -143,39 +144,26 @@ import Layout from "../layouts/Layout.astro";
     canvas.width = parentElement.clientWidth
     canvas.height = parentElement.clientWidth * 4 / 3;
 
-    /**
-     * Draw a frame of the intro sequence.
-     *
-     * @param framesSrc The source of the frame to draw.
-     */
-    const drawFrame = (framesSrc: string) => {
-        img.src = framesSrc;
-        img.onload = () => {
-            context.drawImage(img, 0, 0, canvas.width, canvas.height);
-        };
-    }
-
-    // Load images and draw first frame.
-    const imageSrc: string[] = [];
-    for (let i = 0; i < 47; i++) {
-        imageImports[`/src/assets/intro/${i.toString().padStart(4, "0")}.webp`]().then(({default: {src}}) => {
-            // Draw first frame.
-            if (i === 0)
-                drawFrame(src);
-
-            // Load image source.
-            imageSrc.push(src);
-
-            // Preload image.
-            const preloadImg = new Image();
-            preloadImg.src = src;
+    // Draw frame function and do first frame.
+    const drawFrame = (frameIndex: number) => {
+        const frameName = frameIndex.toString().padStart(4, "0");
+        images[`/src/assets/intro/${frameName}.webp`]().then(({default: {src}}) => {
+            img.src = src;
+            img.onload = () => {
+                context.drawImage(img, 0, 0, canvas.width, canvas.height);
+            };
         });
+    }
+    drawFrame(0);
+
+    for (let i = 0; i < 47; i++) {
+        images[`/src/assets/intro/${i.toString().padStart(4, "0")}.webp`]();
     }
 
     window.addEventListener("scroll", () => {
         const introBounds = introDiv.getBoundingClientRect();
         const scrollFraction = (html.scrollTop - introBounds.top) / (introBounds.bottom - introBounds.top);
         const frameIndex = Math.min(46, Math.ceil(scrollFraction * 47));
-        requestAnimationFrame(() => drawFrame(imageSrc[frameIndex]));
+        requestAnimationFrame(() => drawFrame(frameIndex));
     })
 </script>
