@@ -6,49 +6,62 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
     <!-- Pinpoint Intro Sequence. -->
+    <div class="hero">
+        <div class="hero-content flex-col lg:flex-row-reverse w-full">
+            <!-- Graphics side. -->
+            <div class="basis-1/2 self-stretch">
+                <div class="h-dvh sticky top-0 flex justify-center items-center">
+                    <canvas id="intro-graphics" class="max-w-full aspect-3/4"/>
+                </div>
+            </div>
 
-    <Hero graphicSrc="[Image: human atlas (solid, should look like a brain)] [Insert multiple probes with planned routes and highlighted regions] [Remove probes, exploded brain view, highlight various regions on scroll]">
+            <!-- Text content. -->
+            <div class="basis-1/2">
+                <!-- Titles. -->
+                <div class="flex justify-center items-center h-dvh">
+                    <div class="flex-col">
+                        <Article>
+                            <h1 class="text-primary">Pinpoint</h1>
+                            <h3>Interactive 3D visualization and automation tools for human neuroscience research and
+                                neurosurgery.</h3>
+                        </Article>
 
-        <!-- Titles. -->
-        <div class="flex justify-center items-center h-dvh">
-            <div class="flex-col">
-                <Article>
-                    <h1 class="text-primary">Pinpoint</h1>
-                    <h3>Interactive 3D visualization and automation tools for human neuroscience research and
-                        neurosurgery.</h3>
-                </Article>
+                        <br/>
 
-                <br/>
+                        <div>
+                            <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
+                            <a class="btn" href="#goal">Learn More</a>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Goal. -->
                 <div>
-                    <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
-                    <a class="btn" href="#goal">Learn More</a>
+                    <span class="anchor" id="goal"></span>
+                    <Article>
+                        <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based
+                            planning and
+                            automation tools for efficient and reproducible neurosurgery.
+                        </h1>
+                    </Article>
+                </div>
+
+                <!-- Problem statement. -->
+                <div class="flex justify-center items-center h-dvh">
+                    <Article>
+                        <h2>Human behavior engage multiple regions of the brain.</h2>
+                        <h3>Current tools are designed to study individual brain regions, depend on manual input, and
+                            require extensive expertise ot operate.</h3>
+                        <p>Modern neuroscientists need tools that enable the study of the whole brain to better
+                            understand
+                            human behavior and cure neurodegenerative diseases that affect the whole brain like
+                            Parkinson's
+                            and Alzheimer's.</p>
+                    </Article>
                 </div>
             </div>
         </div>
-
-        <!-- Goal. -->
-        <div>
-            <span class="anchor" id="goal"></span>
-            <Article>
-                <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based planning and
-                    automation tools for efficient and reproducible neurosurgery.
-                </h1>
-            </Article>
-        </div>
-
-        <!-- Problem statement. -->
-        <div class="flex justify-center items-center h-dvh">
-            <Article>
-                <h2>Human behavior engage multiple regions of the brain.</h2>
-                <h3>Current tools are designed to study individual brain regions, depend on manual input, and
-                    require extensive expertise ot operate.</h3>
-                <p>Modern neuroscientists need tools that enable the study of the whole brain to better understand
-                    human behavior and cure neurodegenerative diseases that affect the whole brain like Parkinson's
-                    and Alzheimer's.</p>
-            </Article>
-        </div>
-    </Hero>
+    </div>
 
     <!-- Planning Phase. -->
 
@@ -104,3 +117,9 @@ import Layout from "../layouts/Layout.astro";
         visibility: hidden;
     }
 </style>
+
+<script>
+    import GraphicsDrawer from "../scripts/graphics-drawer.ts";
+
+    new GraphicsDrawer(import.meta.glob<{ default: ImageMetadata }>("/src/assets/intro/*.webp"), "intro-graphics");
+</script>
