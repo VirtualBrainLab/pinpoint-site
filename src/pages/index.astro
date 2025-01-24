@@ -1,5 +1,4 @@
 ---
-import type { ImageMetadata } from "astro";
 import Article from "../components/Article.astro";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
@@ -11,8 +10,8 @@ import Layout from "../layouts/Layout.astro";
         <div class="hero-content flex-col lg:flex-row-reverse w-full">
             <!-- Graphics side. -->
             <div class="basis-1/2 self-stretch">
-                <div class="h-dvh sticky top-0 border flex justify-center items-center">
-                    <canvas class="w-full aspect-3/4 inset-shadow"/>
+                <div class="h-dvh sticky top-0 flex justify-center items-center">
+                    <canvas class="max-w-full aspect-3/4"/>
                 </div>
             </div>
 
@@ -120,6 +119,7 @@ import Layout from "../layouts/Layout.astro";
 </style>
 
 <script>
+    import type {ImageMetadata} from "astro";
     // Collect images.
     const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/intro/*.webp");
 
@@ -137,25 +137,23 @@ import Layout from "../layouts/Layout.astro";
     const img = new Image();
 
     // Setup canvas.
-    const parentElement = canvas.parentElement;
-    if (!parentElement)
-        throw new Error("Canvas parent element not found");
-    canvas.width = parentElement.clientWidth
-    canvas.height = parentElement.clientWidth * 4 / 3;
+    context.imageSmoothingEnabled = false;
 
-    const loadImageThenExec = (frameIndex: number, callback: (imageSrc: string) => void) => {
+    const loadImageThenExec = (frameIndex: number, callback: (value: { default: ImageMetadata }) => void) => {
         const frameName = frameIndex.toString().padStart(4, "0");
-        images[`/src/assets/intro/${frameName}.webp`]().then(({default: {src}}) => {
-            callback(src);
-        });
+        images[`/src/assets/intro/${frameName}.webp`]().then(callback);
     }
 
     // Draw frame function and do first frame.
     const drawFrame = (frameIndex: number) => {
-        loadImageThenExec(frameIndex, (src) => {
+        loadImageThenExec(frameIndex, ({default: {src, width, height}}) => {
+            // Set canvas size to match image.
+            canvas.width = width;
+            canvas.height = height;
+
             img.src = src;
             img.onload = () => {
-                context.drawImage(img, 0, 0, canvas.width, canvas.height);
+                context.drawImage(img, 0, 0, width, height);
             };
         })
     }
@@ -163,7 +161,7 @@ import Layout from "../layouts/Layout.astro";
 
     // Preload images.
     for (let i = 1; i < 47; i++) {
-        loadImageThenExec(i, (src) => {
+        loadImageThenExec(i, ({default: {src}}) => {
             const preloadImg = new Image();
             preloadImg.src = src;
         })
