@@ -1,5 +1,5 @@
 ---
-import type { ImageMetadata } from "astro";
+import type {ImageMetadata} from "astro";
 import Article from "../components/Article.astro";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
@@ -143,24 +143,30 @@ import Layout from "../layouts/Layout.astro";
     canvas.width = parentElement.clientWidth
     canvas.height = parentElement.clientWidth * 4 / 3;
 
-    // Draw frame function and do first frame.
-    const drawFrame = (frameIndex: number) => {
+    const loadImageThenExec = (frameIndex: number, callback: (imageSrc: string) => void) => {
         const frameName = frameIndex.toString().padStart(4, "0");
         images[`/src/assets/intro/${frameName}.webp`]().then(({default: {src}}) => {
+            callback(src);
+        });
+    }
+
+    // Draw frame function and do first frame.
+    const drawFrame = (frameIndex: number) => {
+        loadImageThenExec(frameIndex, (src) => {
             img.src = src;
             img.onload = () => {
                 context.drawImage(img, 0, 0, canvas.width, canvas.height);
             };
-        });
+        })
     }
     drawFrame(0);
 
     // Preload images.
     for (let i = 1; i < 47; i++) {
-        images[`/src/assets/intro/${i.toString().padStart(4, "0")}.webp`]().then(({default: {src}}) => {
-            const img = new Image();
-            img.src = src;
-        });
+        loadImageThenExec(i, (src) => {
+            const preloadImg = new Image();
+            preloadImg.src = src;
+        })
     }
 
     window.addEventListener("scroll", () => {
