@@ -156,6 +156,10 @@ import Layout from "../layouts/Layout.astro";
     }
     drawFrame(0);
 
+    for (let i = 0; i < 47; i++) {
+        images[`/src/assets/intro/${i.toString().padStart(4, "0")}.webp`]();
+    }
+
     window.addEventListener("scroll", () => {
         const introBounds = introDiv.getBoundingClientRect();
         const scrollFraction = (html.scrollTop - introBounds.top) / (introBounds.bottom - introBounds.top);
