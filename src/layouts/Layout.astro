@@ -1,15 +1,25 @@
 ---
+interface Props {
+	imageSrcs: Promise<string[]>;
+}
+
+const { imageSrcs } = Astro.props;
 ---
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico"/>
-		<meta name="generator" content={Astro.generator} />
-		<title>Pinpoint</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico"/>
+    <meta name="generator" content={Astro.generator}/>
+    <title>Pinpoint</title>
+
+    <!-- Preload images. -->
+    {imageSrcs.then((srcs) => srcs.map((src) => (
+        <link rel="preload" href={src} as="image" type="image/avif"/>
+    )))}
+</head>
+<body>
+<slot/>
+</body>
 </html>

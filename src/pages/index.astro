@@ -2,16 +2,24 @@
 import Article from "../components/Article.astro";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
+
+import Graphics from "../components/Graphics.astro";
+import GraphicsImporter from "../scripts/graphics-importer";
+import type { DefaultImageMetadata } from "../scripts/types";
+
+const introImporter = new GraphicsImporter(
+	import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
+);
 ---
 
-<Layout>
+<Layout imageSrcs={introImporter.getImageSrcs()}>
     <!-- Pinpoint Intro Sequence. -->
     <div class="hero">
         <div class="hero-content flex-col lg:flex-row-reverse w-full">
             <!-- Graphics side. -->
             <div class="basis-1/2 self-stretch">
                 <div class="h-dvh sticky top-0 flex justify-center items-center">
-                    <canvas id="intro-graphics" class="max-w-full aspect-3/4"/>
+                    <Graphics graphicsImporter={introImporter} alt="Pinpoint intro sequence"/>
                 </div>
             </div>
 
@@ -117,9 +125,3 @@ import Layout from "../layouts/Layout.astro";
         visibility: hidden;
     }
 </style>
-
-<script>
-    import GraphicsDrawer from "../scripts/graphics-drawer.ts";
-
-    new GraphicsDrawer(import.meta.glob<{ default: ImageMetadata }>("/src/assets/intro/*.webp"), "intro-graphics");
-</script>
