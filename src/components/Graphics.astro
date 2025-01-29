@@ -12,7 +12,7 @@ const { graphicsImporter, alt } = Astro.props;
 <graphics-element data-srcs={JSON.stringify(srcs)}>
     {
         graphicsImporter.getFirstImageMetadata().then(({default: {src, width, height}}) => (
-                <img id="intro-graphics" class="max-w-full" src={src} width={width} height={height}
+                <img class="border max-w-full" src={src} width={width} height={height}
                      alt={alt}/>
         ))
     }
@@ -22,28 +22,34 @@ const { graphicsImporter, alt } = Astro.props;
 <script>
     class Graphics extends HTMLElement {
         connectedCallback() {
+            // Get components.
             const imageSrcs = JSON.parse(this.dataset.srcs ?? "[]");
+            const numberOfImages = imageSrcs.length;
             const outputImage = this.querySelector("img") ?? (() => {
                 throw new Error("Failed to get output image element");
             })();
 
-            // Collect components.
-            const containerBounds =
-                outputImage.parentElement?.parentElement?.getBoundingClientRect() ??
-                (() => {
-                    throw new Error("Failed to get canvas containing element and bounds");
-                })();
-            const numberOfImages = imageSrcs.length;
-
             // Bind scroll event to draw images.
             window.addEventListener("scroll", () => {
+                // Get the container bounds at this point.
+                const containerBounds =
+                    outputImage.parentElement?.parentElement?.parentElement?.parentElement?.getBoundingClientRect() ??
+                    (() => {
+                        throw new Error("Failed to get canvas containing element and bounds");
+                    })();
+
+                // Calculate where in the container we are.
                 const scrollFraction =
                     (document.documentElement.scrollTop - containerBounds.top) /
-                    (containerBounds.bottom - containerBounds.top);
+                    (containerBounds.height);
+
+                // Convert to the image index.
                 const imageIndex = Math.min(
                     numberOfImages - 1,
                     Math.ceil(scrollFraction * numberOfImages),
                 );
+
+                // Draw it
                 requestAnimationFrame(() => outputImage.src = imageSrcs[Math.max(0, Math.min(imageIndex, numberOfImages - 1))]);
             });
         }
