@@ -1,11 +1,11 @@
 ---
 import type GraphicsImporter from "../scripts/graphics-importer";
 interface Props {
-    graphicsImporter: GraphicsImporter;
-    alt: string;
+	graphicsImporter: GraphicsImporter;
+	alt: string;
 }
 
-const {graphicsImporter, alt} = Astro.props;
+const { graphicsImporter, alt } = Astro.props;
 ---
 {graphicsImporter.getImageSrcs().then((srcs) => (
     <!--suppress HtmlUnknownTag -->
