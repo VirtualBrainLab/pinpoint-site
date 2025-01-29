@@ -1,4 +1,4 @@
-import type { ImageMetadata } from "astro";
+import type {ImageMetadata} from "astro";
 
 /**
  * Drawer for scrolling graphics.
@@ -56,14 +56,6 @@ export default class GraphicsDrawer {
 			);
 			requestAnimationFrame(() => this.drawImage(imageIndex));
 		});
-
-		// Preload the other images.
-		for (let i = 1; i < numberOfImages; i++) {
-			this.loadImageThenExec(i, ({ default: { src } }) => {
-				const preloadImage = new Image();
-				preloadImage.src = src;
-			});
-		}
 	}
 
 	/**
