@@ -3,8 +3,7 @@ import Article from "../components/Article.astro";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
 
-import firstFrame from "../assets/intro/0000.avif";
-
+import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
 import type { DefaultImageMetadata } from "../scripts/types";
 
@@ -20,12 +19,7 @@ const introImporter = new GraphicsImporter(
             <!-- Graphics side. -->
             <div class="basis-1/2 self-stretch">
                 <div class="h-dvh sticky top-0 flex justify-center items-center">
-                    {
-                        introImporter.getFirstImageMetadata().then(({default: {src, width, height}}) => (
-                                <img id="intro-graphics" class="max-w-full" src={src} width={width} height={height}
-                                     alt="Intro animation"/>
-                        ))
-                    }
+                    <Graphics graphicsImporter={introImporter} alt="Pinpoint intro sequence"/>
                 </div>
             </div>
 
@@ -131,13 +125,3 @@ const introImporter = new GraphicsImporter(
         visibility: hidden;
     }
 </style>
-
-<script>
-    import GraphicsDrawer from "../scripts/graphics-drawer.ts";
-
-    Promise.all(Object.values(import.meta.glob<{
-        default: ImageMetadata
-    }>("/src/assets/intro/*.avif")).map((imageImport) => imageImport().then(({default: {src}}) => src))).then((introSrcs) => {
-        new GraphicsDrawer("intro-graphics", introSrcs);
-    })
-</script>

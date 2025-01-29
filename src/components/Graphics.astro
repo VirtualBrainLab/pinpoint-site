@@ -1,0 +1,53 @@
+---
+import type GraphicsImporter from "../scripts/graphics-importer";
+interface Props {
+    graphicsImporter: GraphicsImporter;
+    alt: string;
+}
+
+const {graphicsImporter, alt} = Astro.props;
+---
+{graphicsImporter.getImageSrcs().then((srcs) => (
+    <!--suppress HtmlUnknownTag -->
+<graphics-element data-srcs={JSON.stringify(srcs)}>
+    {
+        graphicsImporter.getFirstImageMetadata().then(({default: {src, width, height}}) => (
+                <img id="intro-graphics" class="max-w-full" src={src} width={width} height={height}
+                     alt={alt}/>
+        ))
+    }
+</graphics-element>
+    ))}
+
+<script>
+    class Graphics extends HTMLElement {
+        connectedCallback() {
+            const imageSrcs = JSON.parse(this.dataset.srcs ?? "[]");
+            const outputImage = this.querySelector("img") ?? (() => {
+                throw new Error("Failed to get output image element");
+            })();
+
+            // Collect components.
+            const containerBounds =
+                outputImage.parentElement?.parentElement?.getBoundingClientRect() ??
+                (() => {
+                    throw new Error("Failed to get canvas containing element and bounds");
+                })();
+            const numberOfImages = imageSrcs.length;
+
+            // Bind scroll event to draw images.
+            window.addEventListener("scroll", () => {
+                const scrollFraction =
+                    (document.documentElement.scrollTop - containerBounds.top) /
+                    (containerBounds.bottom - containerBounds.top);
+                const imageIndex = Math.min(
+                    numberOfImages - 1,
+                    Math.ceil(scrollFraction * numberOfImages),
+                );
+                requestAnimationFrame(() => outputImage.src = imageSrcs[Math.max(0, Math.min(imageIndex, numberOfImages - 1))]);
+            });
+        }
+    }
+
+    customElements.define("graphics-element", Graphics);
+</script>

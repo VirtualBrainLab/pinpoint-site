@@ -8,7 +8,7 @@ export default class GraphicsImporter {
 	private readonly imageMetadatas: Promise<DefaultImageMetadata>[];
 
 	/**
-	 * Compute image source URLs promises from the given directory.
+	 * Extract image metadata from dynamic import.
 	 * @param imageDynamicImport Dynamic import of images.
 	 */
 	constructor(
@@ -19,6 +19,9 @@ export default class GraphicsImporter {
 		);
 	}
 
+	/**
+	 * Get the source URLs of all images.
+	 */
 	async getImageSrcs(): Promise<string[]> {
 		return Promise.all(
 			this.imageMetadatas.map((imageMetadataPromise) =>
@@ -27,6 +30,9 @@ export default class GraphicsImporter {
 		);
 	}
 
+	/**
+	 * Get the metadata of the first image.
+	 */
 	async getFirstImageMetadata(): Promise<DefaultImageMetadata> {
 		return await this.imageMetadatas[0];
 	}
