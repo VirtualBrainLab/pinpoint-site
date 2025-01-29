@@ -1,9 +1,9 @@
 ---
-import type { ImageMetadata } from "astro";
+interface Props {
+	imageSrcs: Promise<string[]>;
+}
 
-const introImages = import.meta.glob<{ default: ImageMetadata }>(
-	"/src/assets/intro/*.avif",
-);
+const { imageSrcs } = Astro.props;
 ---
 <!doctype html>
 <html lang="en" class="scroll-smooth">
@@ -15,9 +15,9 @@ const introImages = import.meta.glob<{ default: ImageMetadata }>(
     <title>Pinpoint</title>
 
     <!-- Preload images. -->
-    {Object.values(introImages).map((imageImport) => (imageImport().then(({default: {src}}) => (
-            <link rel="preload" href={src} as="image" type="image/avif"/>
-    ))))}
+    {imageSrcs.then((srcs) => srcs.map((src) => (
+        <link rel="preload" href={src} as="image" type="image/avif"/>
+    )))}
 </head>
 <body>
 <slot/>

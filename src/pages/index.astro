@@ -4,17 +4,28 @@ import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
 
 import firstFrame from "../assets/intro/0000.avif";
+
+import GraphicsImporter from "../scripts/graphics-importer";
+import type { DefaultImageMetadata } from "../scripts/types";
+
+const introImporter = new GraphicsImporter(
+	import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
+);
 ---
 
-<Layout>
+<Layout imageSrcs={introImporter.getImageSrcs()}>
     <!-- Pinpoint Intro Sequence. -->
     <div class="hero">
         <div class="hero-content flex-col lg:flex-row-reverse w-full">
             <!-- Graphics side. -->
             <div class="basis-1/2 self-stretch">
                 <div class="h-dvh sticky top-0 flex justify-center items-center">
-                    <img id="intro-graphics" class="max-w-full" src={firstFrame.src} width="1080" height="1440"
-                         alt="Intro animation"/>
+                    {
+                        introImporter.getFirstImageMetadata().then(({default: {src, width, height}}) => (
+                                <img id="intro-graphics" class="max-w-full" src={src} width={width} height={height}
+                                     alt="Intro animation"/>
+                        ))
+                    }
                 </div>
             </div>
 
