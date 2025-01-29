@@ -2,6 +2,8 @@
 import Article from "../components/Article.astro";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
+
+import firstFrame from "../assets/intro/0000.avif";
 ---
 
 <Layout>
@@ -11,7 +13,8 @@ import Layout from "../layouts/Layout.astro";
             <!-- Graphics side. -->
             <div class="basis-1/2 self-stretch">
                 <div class="h-dvh sticky top-0 flex justify-center items-center">
-                    <canvas id="intro-graphics" class="max-w-full aspect-3/4"/>
+                    <img id="intro-graphics" class="max-w-full" src={firstFrame.src} width="1080" height="1440"
+                         alt="Intro animation"/>
                 </div>
             </div>
 
@@ -121,5 +124,9 @@ import Layout from "../layouts/Layout.astro";
 <script>
     import GraphicsDrawer from "../scripts/graphics-drawer.ts";
 
-    new GraphicsDrawer(import.meta.glob<{ default: ImageMetadata }>("/src/assets/intro/*.avif"), "intro-graphics");
+    Promise.all(Object.values(import.meta.glob<{
+        default: ImageMetadata
+    }>("/src/assets/intro/*.avif")).map((imageImport) => imageImport().then(({default: {src}}) => src))).then((introSrcs) => {
+        new GraphicsDrawer("intro-graphics", introSrcs);
+    })
 </script>

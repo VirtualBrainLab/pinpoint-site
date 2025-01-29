@@ -1,49 +1,33 @@
-import type {ImageMetadata} from "astro";
-
 /**
  * Drawer for scrolling graphics.
  */
 export default class GraphicsDrawer {
 	// Fields.
-	private readonly canvas: HTMLCanvasElement;
 	private readonly outputImage: HTMLImageElement;
-	private readonly context: CanvasRenderingContext2D;
-	private readonly imageImports: (() => Promise<{ default: ImageMetadata }>)[];
+	private readonly imagesSrcs: string[];
 
 	/**
 	 * Construct and gather components for drawing graphics.
 	 *
-	 * @param imageRecords Dynamically imported image records.
-	 * @param canvasId ID of the canvas element to draw on.
+	 * @param outputImageId ID of the output image element.
+	 * @param imagesSrcs Array of image source URLs.
 	 */
-	constructor(
-		imageRecords: Record<string, () => Promise<{ default: ImageMetadata }>>,
-		canvasId: string,
-	) {
+	constructor(outputImageId: string, imagesSrcs: string[]) {
 		// Collect fields.
-		this.imageImports = Object.values(imageRecords);
-		this.canvas =
-			(document.getElementById(canvasId) as HTMLCanvasElement) ??
+		this.outputImage =
+			(document.getElementById(outputImageId) as HTMLImageElement) ??
 			(() => {
-				throw new Error("Failed to get canvas element");
+				throw new Error("Failed to get output image element");
 			});
-		this.outputImage = new Image();
-		this.context =
-			this.canvas.getContext("2d") ??
-			(() => {
-				throw new Error("Failed to get 2d context from canvas");
-			})();
+		this.imagesSrcs = imagesSrcs;
 
 		// Collect components.
 		const containerBounds =
-			this.canvas.parentElement?.getBoundingClientRect() ??
+			this.outputImage.parentElement?.getBoundingClientRect() ??
 			(() => {
 				throw new Error("Failed to get canvas containing element and bounds");
 			})();
-		const numberOfImages = this.imageImports.length;
-
-		// Draw the first image.
-		this.drawImage(0);
+		const numberOfImages = this.imagesSrcs.length;
 
 		// Bind scroll event to draw images.
 		window.addEventListener("scroll", () => {
@@ -59,39 +43,12 @@ export default class GraphicsDrawer {
 	}
 
 	/**
-	 * Load an image by index and then pass it to the callback.
-	 *
-	 * @param imageIndex Index of the image to load.
-	 * @param callback Callback to pass the loaded image to.
-	 * @private
-	 */
-	private loadImageThenExec(
-		imageIndex: number,
-		callback: (value: { default: ImageMetadata }) => void,
-	): void {
-		this.imageImports[imageIndex]().then(callback);
-	}
-
-	/**
-	 * Draw the image with the given index.
+	 * Set the output image to the image with the given index.
 	 *
 	 * @param imageIndex Index of the image to draw.
 	 * @private
 	 */
 	private drawImage(imageIndex: number): void {
-		this.loadImageThenExec(
-			imageIndex,
-			({ default: { src, width, height } }) => {
-				// Set canvas size to match image.
-				this.canvas.width = width;
-				this.canvas.height = height;
-
-				// Draw image.
-				this.outputImage.src = src;
-				this.outputImage.onload = () => {
-					this.context.drawImage(this.outputImage, 0, 0);
-				};
-			},
-		);
+		this.outputImage.src = this.imagesSrcs[imageIndex];
 	}
 }
