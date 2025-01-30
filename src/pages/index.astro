@@ -13,9 +13,12 @@ const introImporter = new GraphicsImporter(
 const equipmentImporter = new GraphicsImporter(
     import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
 );
+const insertionImporter = new GraphicsImporter(
+    import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
+);
 ---
 
-<Layout imageSrcs={[introImporter.getImageSrcs(), equipmentImporter.getImageSrcs()]}>
+<Layout imageSrcs={[introImporter.getImageSrcs(), equipmentImporter.getImageSrcs(), insertionImporter.getImageSrcs()]}>
     <!-- Pinpoint Intro Sequence. -->
     <TwoColumn>
         <Graphics imageMetadatas={introImporter.getImageMetadatas()} slot="graphics"/>
@@ -80,12 +83,12 @@ const equipmentImporter = new GraphicsImporter(
     <TwoColumn>
         <Graphics imageMetadatas={equipmentImporter.getImageMetadatas()} slot="graphics"/>
 
-        <div class="h-3/2dvh">
+        <div class="h-1/3dvh"/>
+        <div class="h-dvh">
             <div class="sticky top-1/3">
                 <Article>
-                    <h2>Simulate your lab equipment</h2>
-                    <h3>Pinpoint includes support for electrophysiology probes, viral injectors, and 2-photon
-                        lasers.</h3>
+                    <h2>Simulate your equipment</h2>
+                    <h3>Pinpoint includes electrophysiology probes, viral injectors, 2-photon lasers, and pipettes.</h3>
                     <p>Custom equipment can be added as well.</p>
                 </Article>
             </div>
@@ -93,19 +96,16 @@ const equipmentImporter = new GraphicsImporter(
         <div class="h-1/2dvh"/>
     </TwoColumn>
 
-    <br/>
-
     <!-- Make complex plans with ease. -->
     <TwoColumn>
-        <p slot="graphics">[Draw plan lines from probes off screen on scroll], [From off screen, probes move in while
-            following the plan lines], [Show the plan lines in the background]</p>
+        <Graphics imageMetadatas={insertionImporter.getImageMetadatas()} slot="graphics"/>
 
-        <div class="h-1/2dvh">
+        <div class="h-1/3dvh"/>
+        <div class="h-dvh">
             <div class="sticky top-1/3">
                 <Article>
-                    <h2>Make complex plans with ease</h2>
-                    <h3>Try complex arrangements and get detailed information about equipment positioning and brain
-                        region access.</h3>
+                    <h2>See the brain in detail</h2>
+                    <h3>Get exact surface coordinates, accessed brain regions, and planar slices.</h3>
                 </Article>
             </div>
         </div>
