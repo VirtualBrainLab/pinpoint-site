@@ -9,6 +9,7 @@ export default {
 		extend: {
 			height: {
 				"1/2dvh": "50dvh",
+				'3/2dvh': '150dvh',
 				'2dvh': '200dvh',
 			},
 		},

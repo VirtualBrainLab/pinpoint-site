@@ -10,9 +10,12 @@ import type {DefaultImageMetadata} from "../scripts/types";
 const introImporter = new GraphicsImporter(
     import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
 );
+const equipmentImporter = new GraphicsImporter(
+    import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
+);
 ---
 
-<Layout imageSrcs={introImporter.getImageSrcs()}>
+<Layout imageSrcs={[introImporter.getImageSrcs(), equipmentImporter.getImageSrcs()]}>
     <!-- Pinpoint Intro Sequence. -->
     <TwoColumn>
         <Graphics imageMetadatas={introImporter.getImageMetadatas()} slot="graphics"/>
@@ -75,11 +78,9 @@ const introImporter = new GraphicsImporter(
 
     <!-- Simulate Equipment. -->
     <TwoColumn>
-        <p slot="graphics">[Move brain back to the center], [Scroll through various probe 3d models; left to right with
-            labels, rat tetrode array, use nanoject for viral injector], [Insert 1-shank neuro pixel probe vertically,
-            bring in channel map, show coordinates in the corner, consider mouse brain]</p>
+        <Graphics imageMetadatas={equipmentImporter.getImageMetadatas()} slot="graphics"/>
 
-        <div class="h-2dvh">
+        <div class="h-3/2dvh">
             <div class="sticky top-1/3">
                 <Article>
                     <h2>Simulate your lab equipment</h2>
@@ -89,6 +90,7 @@ const introImporter = new GraphicsImporter(
                 </Article>
             </div>
         </div>
+        <div class="h-1/2dvh"/>
     </TwoColumn>
 
     <br/>
@@ -98,7 +100,7 @@ const introImporter = new GraphicsImporter(
         <p slot="graphics">[Draw plan lines from probes off screen on scroll], [From off screen, probes move in while
             following the plan lines], [Show the plan lines in the background]</p>
 
-        <div class="h-2dvh">
+        <div class="h-1/2dvh">
             <div class="sticky top-1/3">
                 <Article>
                     <h2>Make complex plans with ease</h2>
@@ -107,11 +109,11 @@ const introImporter = new GraphicsImporter(
                 </Article>
             </div>
         </div>
+        <div class="h-1/2dvh"/>
     </TwoColumn>
 
     <!-- Automation Phase -->
-    <TwoColumn
-            graphicSrc="[Probes fade into insertion lines], [Draw plan lines from probes off screen on scroll], [From off screen, probes move in while following the plan lines]">
+    <TwoColumn>
         <div class="top-0 h-1/2dvh">
             <Article>
                 <h1>Automate Your Experiment</h1>
