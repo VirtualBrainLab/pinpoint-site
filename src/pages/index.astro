@@ -1,116 +1,117 @@
 ---
 import Article from "../components/Article.astro";
-import Hero from "../components/Hero.astro";
+import TwoColumn from "../components/TwoColumn.astro";
 import Layout from "../layouts/Layout.astro";
 
 import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
-import type { DefaultImageMetadata } from "../scripts/types";
+import type {DefaultImageMetadata} from "../scripts/types";
 
 const introImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
 );
 ---
 
 <Layout imageSrcs={introImporter.getImageSrcs()}>
     <!-- Pinpoint Intro Sequence. -->
-    <div class="hero">
-        <div class="hero-content flex-col lg:flex-row-reverse w-full">
-            <!-- Graphics side. -->
-            <div class="basis-1/2 self-stretch">
-                <div class="h-dvh sticky top-0 flex justify-center items-center">
-                    <Graphics imageMetadatas={introImporter.getImageMetadatas()}/>
-                </div>
-            </div>
+    <TwoColumn>
+        <Graphics imageMetadatas={introImporter.getImageMetadatas()} slot="graphics"/>
 
-            <!-- Text content. -->
-            <div class="basis-1/2">
-                <!-- Titles. -->
-                <div class="flex justify-center items-center h-dvh">
-                    <div class="flex-col">
-                        <Article>
-                            <h1 class="text-primary">Pinpoint</h1>
-                            <h3>Interactive 3D visualization and automation tools for human neuroscience research and
-                                neurosurgery.</h3>
-                        </Article>
+        <!-- Titles. -->
+        <div class="flex justify-center items-center h-dvh">
+            <div class="flex-col">
+                <Article>
+                    <h1 class="text-primary">Pinpoint</h1>
+                    <h3>Interactive 3D visualization and automation tools for human neuroscience research and
+                        neurosurgery.</h3>
+                </Article>
 
-                        <br/>
+                <br/>
 
-                        <div>
-                            <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
-                            <a class="btn" href="#goal">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Goal. -->
                 <div>
-                    <span class="anchor" id="goal"></span>
-                    <Article>
-                        <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based
-                            planning and
-                            automation tools for efficient and reproducible neurosurgery.
-                        </h1>
-                    </Article>
-                </div>
-
-                <!-- Problem statement. -->
-                <div class="flex justify-center items-center h-dvh">
-                    <Article>
-                        <h2>Human behavior engage multiple regions of the brain.</h2>
-                        <h3>Current tools are designed to study individual brain regions, depend on manual input, and
-                            require extensive expertise ot operate.</h3>
-                        <p>Modern neuroscientists need tools that enable the study of the whole brain to better
-                            understand
-                            human behavior and cure neurodegenerative diseases that affect the whole brain like
-                            Parkinson's
-                            and Alzheimer's.</p>
-                    </Article>
+                    <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
+                    <a class="btn" href="#goal">Learn More</a>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Goal. -->
+        <div>
+            <span class="anchor" id="goal"></span>
+            <Article>
+                <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based
+                    planning and
+                    automation tools for efficient and reproducible neurosurgery.
+                </h1>
+            </Article>
+        </div>
+
+        <!-- Problem statement. -->
+        <div class="flex justify-center items-center h-dvh">
+            <Article>
+                <h2>Human behavior engage multiple regions of the brain.</h2>
+                <h3>Current tools are designed to study individual brain regions, depend on manual input, and
+                    require extensive expertise ot operate.</h3>
+                <p>Modern neuroscientists need tools that enable the study of the whole brain to better
+                    understand
+                    human behavior and cure neurodegenerative diseases that affect the whole brain like
+                    Parkinson's
+                    and Alzheimer's.</p>
+            </Article>
+        </div>
+    </TwoColumn>
 
     <!-- Planning Phase. -->
 
-    <div class="hero h-1/2dvh">
-        <div class="hero-content">
-            <Article>
-                <h1>Plan Your Next Experiment in Pinpoint</h1>
-            </Article>
-        </div>
-    </div>
-
+    <!-- FIXME: This says "experiments" instead of surgery... do we want that? -->
     <div class="hero">
         <div class="hero-content">
-
+            <Article>
+                <h1 class="text-center">Plan Your Next Experiment in <span class="text-primary">Pinpoint</span></h1>
+            </Article>
         </div>
     </div>
 
-    <!-- FIXME: This says "experiments" instead of surgery... do we want that? -->
-    <Hero graphicSrc="[Move brain back to the center], [Scroll through various probe 3d models; left to right with labels, rat tetrode array, use nanoject for viral injector], [Insert 1-shank neuro pixel probe vertically, bring in channel map, show coordinates in the corner, consider mouse brain]">
-        <div class="top-0 h-1/2dvh">
-            <Article>
-                <h1>Plan Your Next Experiment in Pinpoint</h1>
-            </Article>
-        </div>
+    <br/>
 
-        <div class="top-0 h-dvh">
-            <Article>
-                <h2>Simulate your lab</h2>
-                <h3>Use Neuropixel probes, viral injectors, and 2-photon lasers</h3>
-            </Article>
-        </div>
+    <!-- Simulate Equipment. -->
+    <TwoColumn>
+        <p slot="graphics">[Move brain back to the center], [Scroll through various probe 3d models; left to right with
+            labels, rat tetrode array, use nanoject for viral injector], [Insert 1-shank neuro pixel probe vertically,
+            bring in channel map, show coordinates in the corner, consider mouse brain]</p>
 
-        <div class="top-0 h-dvh">
-            <Article>
-                <h2>View your plan in 3D</h2>
-            </Article>
+        <div class="h-2dvh">
+            <div class="sticky top-1/3">
+                <Article>
+                    <h2>Simulate your lab equipment</h2>
+                    <h3>Pinpoint includes support for electrophysiology probes, viral injectors, and 2-photon
+                        lasers.</h3>
+                    <p>Custom equipment can be added as well.</p>
+                </Article>
+            </div>
         </div>
-    </Hero>
+    </TwoColumn>
+
+    <br/>
+
+    <!-- Make complex plans with ease. -->
+    <TwoColumn>
+        <p slot="graphics">[Draw plan lines from probes off screen on scroll], [From off screen, probes move in while
+            following the plan lines], [Show the plan lines in the background]</p>
+
+        <div class="h-2dvh">
+            <div class="sticky top-1/3">
+                <Article>
+                    <h2>Make complex plans with ease</h2>
+                    <h3>Try complex arrangements and get detailed information about equipment positioning and brain
+                        region access.</h3>
+                </Article>
+            </div>
+    </TwoColumn>
 
     <!-- Automation Phase -->
-    <Hero graphicSrc="[Probes fade into insertion lines], [Draw plan lines from probes off screen on scroll], [From off screen, probes move in while following the plan lines]">
+    <TwoColumn
+            graphicSrc="[Probes fade into insertion lines], [Draw plan lines from probes off screen on scroll], [From off screen, probes move in while following the plan lines]">
         <div class="top-0 h-1/2dvh">
             <Article>
                 <h1>Automate Your Experiment</h1>
@@ -128,7 +129,7 @@ const introImporter = new GraphicsImporter(
                 <h2>Future: Complete Automation</h2>
             </Article>
         </div>
-    </Hero>
+    </TwoColumn>
 </Layout>
 
 <style>
