@@ -1,6 +1,6 @@
 ---
 interface Props {
-	imageSrcs: Promise<string[]>;
+	imageSrcs: Promise<string[]>[];
 }
 
 const { imageSrcs } = Astro.props;
@@ -15,9 +15,9 @@ const { imageSrcs } = Astro.props;
     <title>Pinpoint</title>
 
     <!-- Preload images. -->
-    {imageSrcs.then((srcs) => srcs.map((src) => (
-        <link rel="preload" href={src} as="image" type="image/avif"/>
-    )))}
+    {imageSrcs.map((srcSet) => srcSet.then((srcs) => srcs.map((src) => (
+            <link rel="preload" href={src} as="image" type="image/avif"/>
+    ))))}
 </head>
 <body>
 <slot/>

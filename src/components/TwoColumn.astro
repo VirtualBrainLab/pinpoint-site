@@ -1,0 +1,17 @@
+---
+---
+<div class="hero">
+    <div class="hero-content flex-col lg:flex-row-reverse w-full">
+        <!-- Graphics side. -->
+        <div class="basis-1/2 self-stretch">
+            <div class="h-dvh sticky top-0 flex justify-center items-center">
+                <slot name="graphics"/>
+            </div>
+        </div>
+
+        <!-- Content side. -->
+        <div class="basis-1/2">
+            <slot/>
+        </div>
+    </div>
+</div>

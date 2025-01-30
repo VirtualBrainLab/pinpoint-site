@@ -1,50 +1,53 @@
 ---
-import type GraphicsImporter from "../scripts/graphics-importer";
+import type { DefaultImageMetadata } from "../scripts/types";
 interface Props {
-	graphicsImporter: GraphicsImporter;
-	alt: string;
+	imageMetadatas: Promise<DefaultImageMetadata[]>;
 }
 
-const { graphicsImporter, alt } = Astro.props;
+const { imageMetadatas } = Astro.props;
 ---
-{graphicsImporter.getImageSrcs().then((srcs) => (
-    <!--suppress HtmlUnknownTag -->
-<graphics-element data-srcs={JSON.stringify(srcs)}>
-    {
-        graphicsImporter.getFirstImageMetadata().then(({default: {src, width, height}}) => (
-                <img id="intro-graphics" class="max-w-full" src={src} width={width} height={height}
-                     alt={alt}/>
+{
+    imageMetadatas.then((metadatas) => (
+        <!--suppress HtmlUnknownTag -->
+    <graphics-element data-image-srcs={JSON.stringify(metadatas.map(({default: {src}}) => src))}>
+        <img class="max-w-full rounded-xl" src={metadatas[0].default.src} width={metadatas[0].default.width}
+             height={metadatas[0].default.height} alt=""/>
+    </graphics-element>
         ))
     }
-</graphics-element>
-    ))}
 
 <script>
     class Graphics extends HTMLElement {
         connectedCallback() {
-            const imageSrcs = JSON.parse(this.dataset.srcs ?? "[]");
+            // Get components.
+            const imageSrcs = JSON.parse(this.dataset.imageSrcs ?? "[]");
+            const numberOfImages = imageSrcs.length;
             const outputImage = this.querySelector("img") ?? (() => {
                 throw new Error("Failed to get output image element");
             })();
 
-            // Collect components.
-            const containerBounds =
-                outputImage.parentElement?.parentElement?.getBoundingClientRect() ??
-                (() => {
-                    throw new Error("Failed to get canvas containing element and bounds");
-                })();
-            const numberOfImages = imageSrcs.length;
-
             // Bind scroll event to draw images.
             window.addEventListener("scroll", () => {
+                // Get the container bounds at this point.
+                const containerElement = outputImage.parentElement?.parentElement?.parentElement?.parentElement?.parentElement ?? (() => {
+                    throw new Error("Failed to get section element");
+                })();
+                const containerBounds = containerElement.getBoundingClientRect();
+
+                // Calculate where in the container we are.
                 const scrollFraction =
-                    (document.documentElement.scrollTop - containerBounds.top) /
-                    (containerBounds.bottom - containerBounds.top);
+                    (document.documentElement.scrollTop - containerElement.offsetTop) /
+                    (containerBounds.height - window.innerHeight);
+
+                // Convert to the image index.
                 const imageIndex = Math.min(
                     numberOfImages - 1,
                     Math.ceil(scrollFraction * numberOfImages),
                 );
-                requestAnimationFrame(() => outputImage.src = imageSrcs[Math.max(0, Math.min(imageIndex, numberOfImages - 1))]);
+
+                // Draw it if we are in bound.
+                if (imageIndex >= 0 && imageIndex < numberOfImages)
+                    requestAnimationFrame(() => outputImage.src = imageSrcs[imageIndex]);
             });
         }
     }
