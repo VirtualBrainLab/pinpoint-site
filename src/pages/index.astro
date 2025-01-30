@@ -19,7 +19,7 @@ const introImporter = new GraphicsImporter(
             <!-- Graphics side. -->
             <div class="basis-1/2 self-stretch">
                 <div class="h-dvh sticky top-0 flex justify-center items-center">
-                    <Graphics graphicsImporter={introImporter} alt="Pinpoint intro sequence"/>
+                    <Graphics imageMetadatas={introImporter.getImageMetadatas()} alt="Pinpoint intro sequence"/>
                 </div>
             </div>
 

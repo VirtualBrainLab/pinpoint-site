@@ -1,4 +1,4 @@
-import type { DefaultImageMetadata } from "./types.ts";
+import type {DefaultImageMetadata} from "./types.ts";
 
 /**
  * Imports graphics from source folder and provides their resolved URLs.
@@ -20,6 +20,13 @@ export default class GraphicsImporter {
 	}
 
 	/**
+	 * Resolve all image metadata.
+	 */
+	async getImageMetadatas(): Promise<DefaultImageMetadata[]> {
+		return Promise.all(this.imageMetadatas);
+	}
+
+	/**
 	 * Get the source URLs of all images.
 	 */
 	async getImageSrcs(): Promise<string[]> {
@@ -28,12 +35,5 @@ export default class GraphicsImporter {
 				imageMetadataPromise.then(({ default: { src } }) => src),
 			),
 		);
-	}
-
-	/**
-	 * Get the metadata of the first image.
-	 */
-	async getFirstImageMetadata(): Promise<DefaultImageMetadata> {
-		return await this.imageMetadatas[0];
 	}
 }
