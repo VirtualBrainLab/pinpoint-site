@@ -1,8 +1,8 @@
 ---
+import {Image} from "astro:assets";
 import Article from "../components/Article.astro";
 import TwoColumn from "../components/TwoColumn.astro";
 import Layout from "../layouts/Layout.astro";
-import {Image} from "astro:assets"
 
 import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
@@ -11,7 +11,6 @@ import type {DefaultImageMetadata} from "../scripts/types";
 // Import static images.
 import MPMRig from "../assets/manipulators/mpm-rig.avif";
 import SensapexRig from "../assets/manipulators/sensapex-rig.avif";
-
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
