@@ -2,17 +2,16 @@
 import type {DefaultImageMetadata} from "../scripts/types";
 interface Props {
     imageMetadatas: Promise<DefaultImageMetadata[]>;
-	alt: string;
 }
 
-const {imageMetadatas, alt} = Astro.props;
+const {imageMetadatas} = Astro.props;
 ---
 {
     imageMetadatas.then((metadatas) => (
         <!--suppress HtmlUnknownTag -->
     <graphics-element data-srcs={JSON.stringify(metadatas.map(({default: {src}}) => src))}>
         <img class="max-w-full" src={metadatas[0].default.src} width={metadatas[0].default.width}
-             height={metadatas[0].default.height} alt={alt}/>
+             height={metadatas[0].default.height} alt=""/>
     </graphics-element>
         ))
     }
@@ -30,16 +29,18 @@ const {imageMetadatas, alt} = Astro.props;
             // Bind scroll event to draw images.
             window.addEventListener("scroll", () => {
                 // Get the container bounds at this point.
-                const containerBounds =
-                    outputImage.parentElement?.parentElement?.parentElement?.parentElement?.getBoundingClientRect() ??
-                    (() => {
-                        throw new Error("Failed to get canvas containing element and bounds");
-                    })();
+                const containerElement = outputImage.parentElement?.parentElement?.parentElement?.parentElement?.parentElement ?? (() => {
+                    throw new Error("Failed to get section element");
+                })();
+                const containerBounds = containerElement.getBoundingClientRect();
 
                 // Calculate where in the container we are.
                 const scrollFraction =
-                    (document.documentElement.scrollTop - containerBounds.top) /
-                    (containerBounds.height);
+                    (document.documentElement.scrollTop) /
+                    (containerBounds.height - window.innerHeight);
+
+                console.log(containerBounds)
+                console.log(document.documentElement.scrollTop)
 
                 // Convert to the image index.
                 const imageIndex = Math.min(
