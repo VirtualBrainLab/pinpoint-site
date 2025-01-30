@@ -1,12 +1,12 @@
 ---
-import { Image } from "astro:assets";
+import {Image} from "astro:assets";
 import Article from "../components/Article.astro";
 import TwoColumn from "../components/TwoColumn.astro";
 import Layout from "../layouts/Layout.astro";
 
 import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
-import type { DefaultImageMetadata } from "../scripts/types";
+import type {DefaultImageMetadata} from "../scripts/types";
 
 // Import static images.
 import MPMRig from "../assets/manipulators/mpm-rig.avif";
@@ -14,16 +14,16 @@ import SensapexRig from "../assets/manipulators/sensapex-rig.avif";
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
 );
 const equipmentImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
 );
 const insertionImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
 );
 const automationImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
 );
 ---
 
@@ -45,35 +45,41 @@ const automationImporter = new GraphicsImporter(
 
                 <div>
                     <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
-                    <a class="btn" href="#goal">Learn More</a>
+                    <a class="btn" href="#learn-more">Learn More</a>
                 </div>
             </div>
         </div>
 
         <!-- Goal. -->
-        <div>
-            <span class="anchor" id="goal"></span>
-            <Article>
-                <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based
-                    planning and
-                    automation tools for efficient and reproducible neurosurgery.
-                </h1>
-            </Article>
+        <div class="h-dvh" id="learn-more">
+            <div class="sticky top-1/3">
+                <!--<span class="anchor" id="goal"></span>-->
+                <Article>
+                    <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based
+                        planning and
+                        automation tools for efficient and reproducible neurosurgery.
+                    </h1>
+                </Article>
+            </div>
         </div>
 
         <!-- Problem statement. -->
-        <div class="flex justify-center items-center h-dvh">
-            <Article>
-                <h2>Human behavior engage multiple regions of the brain.</h2>
-                <h3>Current tools are designed to study individual brain regions, depend on manual input, and
-                    require extensive expertise to operate.</h3>
-                <p>Modern neuroscientists need tools that enable the study of the whole brain to better
-                    understand
-                    human behavior and cure neurodegenerative diseases that affect the whole brain like
-                    Parkinson's
-                    and Alzheimer's.</p>
-            </Article>
+        <div class="h-1/4dvh"/>
+        <div class="h-dvh">
+            <div class="sticky top-1/3">
+                <Article>
+                    <h2>Human behavior engage multiple regions of the brain.</h2>
+                    <h3>Current tools are designed to study individual brain regions, depend on manual input, and
+                        require extensive expertise to operate.</h3>
+                    <p>Modern neuroscientists need tools that enable the study of the whole brain to better
+                        understand
+                        human behavior and cure neurodegenerative diseases that affect the whole brain like
+                        Parkinson's
+                        and Alzheimer's.</p>
+                </Article>
+            </div>
         </div>
+        <div class="h-1/4dvh"/>
     </TwoColumn>
 
     <!-- Planning Phase. -->
