@@ -1,15 +1,15 @@
 ---
-import type {DefaultImageMetadata} from "../scripts/types";
+import type { DefaultImageMetadata } from "../scripts/types";
 interface Props {
-    imageMetadatas: Promise<DefaultImageMetadata[]>;
+	imageMetadatas: Promise<DefaultImageMetadata[]>;
 }
 
-const {imageMetadatas} = Astro.props;
+const { imageMetadatas } = Astro.props;
 ---
 {
     imageMetadatas.then((metadatas) => (
         <!--suppress HtmlUnknownTag -->
-    <graphics-element data-srcs={JSON.stringify(metadatas.map(({default: {src}}) => src))}>
+    <graphics-element data-image-srcs={JSON.stringify(metadatas.map(({default: {src}}) => src))}>
         <img class="max-w-full" src={metadatas[0].default.src} width={metadatas[0].default.width}
              height={metadatas[0].default.height} alt=""/>
     </graphics-element>
@@ -20,7 +20,7 @@ const {imageMetadatas} = Astro.props;
     class Graphics extends HTMLElement {
         connectedCallback() {
             // Get components.
-            const imageSrcs = JSON.parse(this.dataset.srcs ?? "[]");
+            const imageSrcs = JSON.parse(this.dataset.imageSrcs ?? "[]");
             const numberOfImages = imageSrcs.length;
             const outputImage = this.querySelector("img") ?? (() => {
                 throw new Error("Failed to get output image element");
@@ -36,11 +36,8 @@ const {imageMetadatas} = Astro.props;
 
                 // Calculate where in the container we are.
                 const scrollFraction =
-                    (document.documentElement.scrollTop) /
+                    (document.documentElement.scrollTop - containerElement.offsetTop) /
                     (containerBounds.height - window.innerHeight);
-
-                console.log(containerBounds)
-                console.log(document.documentElement.scrollTop)
 
                 // Convert to the image index.
                 const imageIndex = Math.min(
@@ -48,8 +45,9 @@ const {imageMetadatas} = Astro.props;
                     Math.ceil(scrollFraction * numberOfImages),
                 );
 
-                // Draw it
-                requestAnimationFrame(() => outputImage.src = imageSrcs[Math.max(0, Math.min(imageIndex, numberOfImages - 1))]);
+                // Draw it if we are in bound.
+                if (imageIndex >= 0 && imageIndex < numberOfImages)
+                    requestAnimationFrame(() => outputImage.src = imageSrcs[imageIndex]);
             });
         }
     }

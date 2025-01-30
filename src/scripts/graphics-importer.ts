@@ -1,4 +1,4 @@
-import type {DefaultImageMetadata} from "./types.ts";
+import type { DefaultImageMetadata } from "./types.ts";
 
 /**
  * Imports graphics from source folder and provides their resolved URLs.
