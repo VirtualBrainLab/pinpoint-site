@@ -2,11 +2,18 @@
 import Article from "../components/Article.astro";
 import TwoColumn from "../components/TwoColumn.astro";
 import Layout from "../layouts/Layout.astro";
+import {Image} from "astro:assets"
 
 import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
 import type {DefaultImageMetadata} from "../scripts/types";
 
+// Import static images.
+import MPMRig from "../assets/manipulators/mpm-rig.avif";
+import SensapexRig from "../assets/manipulators/sensapex-rig.avif";
+
+
+// Import graphics.
 const introImporter = new GraphicsImporter(
     import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
 );
@@ -57,7 +64,7 @@ const insertionImporter = new GraphicsImporter(
             <Article>
                 <h2>Human behavior engage multiple regions of the brain.</h2>
                 <h3>Current tools are designed to study individual brain regions, depend on manual input, and
-                    require extensive expertise ot operate.</h3>
+                    require extensive expertise to operate.</h3>
                 <p>Modern neuroscientists need tools that enable the study of the whole brain to better
                     understand
                     human behavior and cure neurodegenerative diseases that affect the whole brain like
@@ -72,12 +79,10 @@ const insertionImporter = new GraphicsImporter(
     <div class="hero">
         <div class="hero-content">
             <Article>
-                <h1 class="text-center">Plan Your Next Surgery with <span class="text-primary">Pinpoint</span></h1>
+                <h1 class="text-center">Plan Your Next Surgery with<br/><span class="text-primary">Pinpoint</span></h1>
             </Article>
         </div>
     </div>
-
-    <br/>
 
     <!-- Simulate Equipment. -->
     <TwoColumn>
@@ -113,22 +118,24 @@ const insertionImporter = new GraphicsImporter(
     </TwoColumn>
 
     <!-- Automation Phase -->
+
+    <div class="hero">
+        <div class="hero-content">
+            <Article>
+                <h1 class="text-center">Run Your Plan with<br/><span class="text-primary">Pinpoint Automation</span>
+                </h1>
+            </Article>
+        </div>
+    </div>
+
     <TwoColumn>
-        <div class="top-0 h-1/2dvh">
+        <div class="h-3/2dvh">
             <Article>
-                <h1>Automate Your Experiment</h1>
-            </Article>
-        </div>
-
-        <div class="top-0 h-dvh">
-            <Article>
-                <h2>Robot-assisted surgeries.</h2>
-            </Article>
-        </div>
-
-        <div class="top-0 h-dvh">
-            <Article>
-                <h2>Future: Complete Automation</h2>
+                <h2>Let the robots do the heavy lifting</h2>
+                <h3>Pinpoint can control neurosurgery robotic manipulators to automatically run your plans.</h3>
+                <p>Below: Sensapex Multiprobe <span class="italic">in vivo</span> rig and New Scale MPM rig.</p>
+                <Image class="rounded-xl w-3/4" src={SensapexRig} alt="Sensapex Rig"/>
+                <Image class="rounded-xl w-3/4" src={MPMRig} alt="MPM Rig"/>
             </Article>
         </div>
     </TwoColumn>
