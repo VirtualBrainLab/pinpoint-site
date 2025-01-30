@@ -22,9 +22,12 @@ const equipmentImporter = new GraphicsImporter(
 const insertionImporter = new GraphicsImporter(
     import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
 );
+const automationImporter = new GraphicsImporter(
+    import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
+);
 ---
 
-<Layout imageSrcs={[introImporter.getImageSrcs(), equipmentImporter.getImageSrcs(), insertionImporter.getImageSrcs()]}>
+<Layout imageSrcs={[introImporter.getImageSrcs(), equipmentImporter.getImageSrcs(), insertionImporter.getImageSrcs(), automationImporter.getImageSrcs()]}>
     <!-- Pinpoint Intro Sequence. -->
     <TwoColumn>
         <Graphics imageMetadatas={introImporter.getImageMetadatas()} slot="graphics"/>
@@ -128,15 +131,21 @@ const insertionImporter = new GraphicsImporter(
     </div>
 
     <TwoColumn>
+        <Graphics imageMetadatas={automationImporter.getImageMetadatas()} slot="graphics"/>
+
+        <div class="h-1/4dvh"/>
         <div class="h-3/2dvh">
-            <Article>
-                <h2>Let the robots do the heavy lifting</h2>
-                <h3>Pinpoint can control neurosurgery robotic manipulators to automatically run your plans.</h3>
-                <p>Below: Sensapex Multiprobe <span class="italic">in vivo</span> rig and New Scale MPM rig.</p>
-                <Image class="rounded-xl w-3/4" src={SensapexRig} alt="Sensapex Rig"/>
-                <Image class="rounded-xl w-3/4" src={MPMRig} alt="MPM Rig"/>
-            </Article>
+            <div class="sticky top-1/4">
+                <Article>
+                    <h2>Let the robots do the heavy lifting</h2>
+                    <h3>Pinpoint can control neurosurgery robotic manipulators to automatically run your plans.</h3>
+                    <p>Below: Sensapex Multiprobe <span class="italic">in vivo</span> rig and New Scale MPM rig.</p>
+                    <Image class="rounded-xl w-3/4" src={SensapexRig} alt="Sensapex Rig"/>
+                    <Image class="rounded-xl w-3/4" src={MPMRig} alt="MPM Rig"/>
+                </Article>
+            </div>
         </div>
+        <div class="h-1/4dvh"/>
     </TwoColumn>
 </Layout>
 
