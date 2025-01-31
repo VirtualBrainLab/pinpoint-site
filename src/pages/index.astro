@@ -8,8 +8,10 @@ import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
 import type {DefaultImageMetadata} from "../scripts/types";
 
-// Import static images.
+import MISRig from "../assets/manipulators/mis-rig.avif";
 import MPMRig from "../assets/manipulators/mpm-rig.avif";
+import ScientificaManipulator from "../assets/manipulators/scientifica-manipulator.avif";
+// Import static images.
 import SensapexRig from "../assets/manipulators/sensapex-rig.avif";
 
 // Import graphics.
@@ -37,8 +39,8 @@ const automationImporter = new GraphicsImporter(
             <div class="flex-col">
                 <Article>
                     <h1 class="text-primary">Pinpoint</h1>
-                    <h3>Interactive 3D visualization and automation tools for human neuroscience research and
-                        neurosurgery.</h3>
+                    <h3>Interactive 3D visualization and automation tools for neuroscience research and
+                        surgery.</h3>
                 </Article>
 
                 <br/>
@@ -64,8 +66,8 @@ const automationImporter = new GraphicsImporter(
         </div>
 
         <!-- Problem statement. -->
-        <div class="h-1/4dvh"/>
-        <div class="h-dvh">
+        <div class="h-1/3dvh"/>
+        <div class="h-3/2dvh">
             <div class="sticky top-1/3">
                 <Article>
                     <h2>Human behavior engage multiple regions of the brain.</h2>
@@ -79,7 +81,7 @@ const automationImporter = new GraphicsImporter(
                 </Article>
             </div>
         </div>
-        <div class="h-1/4dvh"/>
+        <div class="h-1/2dvh"/>
     </TwoColumn>
 
     <!-- Planning Phase. -->
@@ -136,18 +138,70 @@ const automationImporter = new GraphicsImporter(
         </div>
     </div>
 
+    <div class="h-1/4dvh"/>
+
+    <div class="hero">
+        <div class="hero-content flex-col lg:flex-row-reverse w-full">
+            <div class="basis-1/2 self-stretch">
+                <Image class="rounded-xl w-3/4" src={SensapexRig} alt="Sensapex Rig"/>
+                <Article>
+                    <p>Sensapex Multiprobe rig</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl w-3/4" src={MPMRig} alt="MPM Rig"/>
+                <Article>
+                    <p>New Scale MPM rig</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl w-3/4" src={MISRig} alt="MIS Rig"/>
+                <Article>
+                    <p>New Scale MIS rig</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl w-3/4" src={ScientificaManipulator}
+                       alt="Scientifica InVivoStar Micromanipulator"/>
+                <Article>
+                    <p>Scientifica InVivoStar Micromanipulator</p>
+                </Article>
+            </div>
+
+            <div class="basis-1/2 self-stretch">
+                <div class="sticky top-1/3">
+                    <Article>
+                        <h2>Let the robots do the heavy lifting</h2>
+                        <h3>Pinpoint can control neurosurgery robotic manipulators to automatically run your plans.</h3>
+                        <ul>
+                            <li>Sensapex uMp-4</li>
+                            <li>Sensapex uMp-3</li>
+                            <li>New Scale MPM Rig</li>
+                            <li>New Scale MIS Rig</li>
+                            <li>Scientifica InVivoStar Micromanipulator/li>
+                            <li>LabMaker</li>
+                            <li>More can be added through <a href="https://ephys-link.virtualbrainlab.org/">Ephys
+                                Link</a></li>
+                        </ul>
+                    </Article>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <TwoColumn>
         <Graphics imageMetadatas={automationImporter.getImageMetadatas()} slot="graphics"/>
 
         <div class="h-1/4dvh"/>
         <div class="h-3/2dvh">
-            <div class="sticky top-1/4">
+            <div class="sticky top-1/3">
                 <Article>
-                    <h2>Let the robots do the heavy lifting</h2>
-                    <h3>Pinpoint can control neurosurgery robotic manipulators to automatically run your plans.</h3>
-                    <p>Below: Sensapex Multiprobe <span class="italic">in vivo</span> rig and New Scale MPM rig.</p>
-                    <Image class="rounded-xl w-3/4" src={SensapexRig} alt="Sensapex Rig"/>
-                    <Image class="rounded-xl w-3/4" src={MPMRig} alt="MPM Rig"/>
+                    <h2>Automation improves accuracy and efficiency</h2>
+                    <h3>Robotic manipulators can make highly precise movements and perform multiple tasks in parallel.
+                        These are important for enabling large-scale studies.</h3>
                 </Article>
             </div>
         </div>
