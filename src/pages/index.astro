@@ -1,12 +1,12 @@
 ---
-import {Image} from "astro:assets";
+import { Image } from "astro:assets";
 import Article from "../components/Article.astro";
 import TwoColumn from "../components/TwoColumn.astro";
 import Layout from "../layouts/Layout.astro";
 
 import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
-import type {DefaultImageMetadata} from "../scripts/types";
+import type { DefaultImageMetadata } from "../scripts/types";
 
 import Durations from "../assets/future/durations.avif";
 import Parallax from "../assets/future/parallax.avif";
@@ -29,16 +29,16 @@ import Spacer from "../components/Spacer.astro";
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
-    import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
+	import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
 );
 const equipmentImporter = new GraphicsImporter(
-    import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
+	import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
 );
 const insertionImporter = new GraphicsImporter(
-    import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
+	import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
 );
 const automationImporter = new GraphicsImporter(
-    import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
+	import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
 );
 ---
 
