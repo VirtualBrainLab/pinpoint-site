@@ -3,6 +3,8 @@ name: Deploy Website
 on:
   pull_request:
     branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -15,15 +17,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy-website:
-    name: Deploy Website
+  build-website:
+    name: Build Website
 
-    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: 🛎 Checkout
@@ -49,6 +46,20 @@ jobs:
       - name: 🔨 Build
         run: pnpm build
 
+
+  # Only deploy on main.
+  deploy-website:
+    name: Deploy Website
+
+    if: github.ref == 'refs/heads/main'
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    needs: build-website
+
+    steps:
       # Upload artifact if requested
       - name: ⬆️ Upload artifact
         uses: actions/upload-pages-artifact@v3
