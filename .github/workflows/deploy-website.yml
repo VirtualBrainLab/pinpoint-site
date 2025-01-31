@@ -51,6 +51,8 @@ jobs:
   deploy-website:
     name: Deploy Website
 
+    runs-on: ubuntu-latest
+
     if: github.ref == 'refs/heads/main'
 
     environment:
