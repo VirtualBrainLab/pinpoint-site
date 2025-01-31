@@ -17,6 +17,11 @@ import Parallax from "../assets/future/parallax.avif"
 import Durations from "../assets/future/durations.avif"
 import TeachingPinpoint from "../assets/outreach/teaching-pinpoint.avif"
 import UsingPinpoint from "../assets/outreach/using-pinpoint.avif"
+import Kenneth from "../assets/people/kenneth.avif"
+import Jasmine from "../assets/people/jasmine.avif"
+import Qiqi from "../assets/people/qiqi.avif"
+import Selina from "../assets/people/selina.avif"
+import Kai from "../assets/people/kai.avif"
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
@@ -301,18 +306,33 @@ const automationImporter = new GraphicsImporter(
     <div class="hero">
         <div class="hero-content flex-col lg:flex-row-reverse w-full">
             <div class="basis-1/2 self-stretch">
-                <Image class="rounded-xl" src={TeachingPinpoint} alt="Teaching Pinpoint"/>
-                <Article>
-                    <p>Dr. Birman teaching Pinpoint to researchers at the Allen Institute 2024 Neuropixels and OpenScope
-                        Workshop</p>
-                </Article>
-
-                <br/>
-
-                <Image class="rounded-xl" src={UsingPinpoint} alt="Using Pinpoint"/>
-                <Article>
-                    <p>A workshop attendee using Pinpoint in their laptop browser</p>
-                </Article>
+                <div class="avatar-group -space-x-6 rtl:space-x-reverse">
+                    <div class="avatar">
+                        <div class="w-12">
+                            <Image src={Kenneth} alt="Kenneth"/>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="size-12">
+                            <Image src={Jasmine} alt="Jasmine"/>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="size-12">
+                            <Image src={Qiqi} alt="Qiqi"/>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class=size-12">
+                            <Image src={Selina} alt="Selina"/>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="size-12">
+                            <Image src={Kai} alt="Kai"/>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="basis-1/2 self-stretch">
