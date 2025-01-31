@@ -2,19 +2,26 @@
 import type { DefaultImageMetadata } from "../scripts/types";
 interface Props {
 	imageMetadatas: Promise<DefaultImageMetadata[]>;
+	alt: string;
 }
 
-const { imageMetadatas } = Astro.props;
+const { imageMetadatas, alt } = Astro.props;
 ---
 {
     imageMetadatas.then((metadatas) => (
         <!--suppress HtmlUnknownTag -->
     <graphics-element data-image-srcs={JSON.stringify(metadatas.map(({default: {src}}) => src))}>
         <img class="max-w-full rounded-xl" src={metadatas[0].default.src} width={metadatas[0].default.width}
-             height={metadatas[0].default.height} alt=""/>
+             height={metadatas[0].default.height} alt={alt}/>
     </graphics-element>
         ))
     }
+
+<style>
+    img {
+        font-size: 0;
+    }
+</style>
 
 <script>
     class Graphics extends HTMLElement {
