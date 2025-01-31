@@ -26,6 +26,9 @@ const { imageMetadatas } = Astro.props;
                 throw new Error("Failed to get output image element");
             })();
 
+            // Keep track of the last rendered image.
+            let lastRenderedIndex = -1;
+
             // Bind scroll event to draw images.
             window.addEventListener("scroll", () => {
                 // Get the container bounds at this point.
@@ -46,8 +49,16 @@ const { imageMetadatas } = Astro.props;
                 );
 
                 // Draw it if we are in bound.
-                if (imageIndex >= 0 && imageIndex < numberOfImages)
+                if (imageIndex >= 0 && imageIndex < numberOfImages) {
                     requestAnimationFrame(() => outputImage.src = imageSrcs[imageIndex]);
+                    lastRenderedIndex = imageIndex;
+                }
+                // If we are out of bounds, and we haven't fixed it yet, fix it.
+                else if (imageIndex !== lastRenderedIndex) {
+                    const clampedIndex = Math.max(0, Math.min(numberOfImages - 1, imageIndex));
+                    requestAnimationFrame(() => outputImage.src = imageSrcs[clampedIndex]);
+                    lastRenderedIndex = clampedIndex;
+                }
             });
         }
     }

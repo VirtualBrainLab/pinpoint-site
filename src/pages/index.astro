@@ -8,9 +8,20 @@ import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
 import type { DefaultImageMetadata } from "../scripts/types";
 
+import Durations from "../assets/future/durations.avif";
+import Parallax from "../assets/future/parallax.avif";
 // Import static images.
+import MISRig from "../assets/manipulators/mis-rig.avif";
 import MPMRig from "../assets/manipulators/mpm-rig.avif";
+import ScientificaManipulator from "../assets/manipulators/scientifica-manipulator.avif";
 import SensapexRig from "../assets/manipulators/sensapex-rig.avif";
+import TeachingPinpoint from "../assets/outreach/teaching-pinpoint.avif";
+import UsingPinpoint from "../assets/outreach/using-pinpoint.avif";
+import Jasmine from "../assets/people/jasmine.avif";
+import Kai from "../assets/people/kai.avif";
+import Kenneth from "../assets/people/kenneth.avif";
+import Qiqi from "../assets/people/qiqi.avif";
+import Selina from "../assets/people/selina.avif";
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
@@ -37,43 +48,49 @@ const automationImporter = new GraphicsImporter(
             <div class="flex-col">
                 <Article>
                     <h1 class="text-primary">Pinpoint</h1>
-                    <h3>Interactive 3D visualization and automation tools for human neuroscience research and
-                        neurosurgery.</h3>
+                    <h3>Interactive 3D visualization and automation tools for neuroscience research and
+                        surgery.</h3>
                 </Article>
 
                 <br/>
 
                 <div>
                     <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
-                    <a class="btn" href="#goal">Learn More</a>
+                    <a class="btn" href="#learn-more">Learn More</a>
                 </div>
             </div>
         </div>
 
         <!-- Goal. -->
-        <div>
-            <span class="anchor" id="goal"></span>
-            <Article>
-                <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based
-                    planning and
-                    automation tools for efficient and reproducible neurosurgery.
-                </h1>
-            </Article>
+        <div class="h-dvh" id="learn-more">
+            <div class="sticky top-1/3">
+                <!--<span class="anchor" id="goal"></span>-->
+                <Article>
+                    <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based
+                        planning and
+                        automation tools for efficient and reproducible neurosurgery.
+                    </h1>
+                </Article>
+            </div>
         </div>
 
         <!-- Problem statement. -->
-        <div class="flex justify-center items-center h-dvh">
-            <Article>
-                <h2>Human behavior engage multiple regions of the brain.</h2>
-                <h3>Current tools are designed to study individual brain regions, depend on manual input, and
-                    require extensive expertise to operate.</h3>
-                <p>Modern neuroscientists need tools that enable the study of the whole brain to better
-                    understand
-                    human behavior and cure neurodegenerative diseases that affect the whole brain like
-                    Parkinson's
-                    and Alzheimer's.</p>
-            </Article>
+        <div class="h-1/3dvh"/>
+        <div class="h-3/2dvh">
+            <div class="sticky top-1/3">
+                <Article>
+                    <h2>Human behavior engage multiple regions of the brain.</h2>
+                    <h3>Current tools are designed to study individual brain regions, depend on manual input, and
+                        require extensive expertise to operate.</h3>
+                    <p>Modern neuroscientists need tools that enable the study of the whole brain to better
+                        understand
+                        human behavior and cure neurodegenerative diseases that affect the whole brain like
+                        Parkinson's
+                        and Alzheimer's.</p>
+                </Article>
+            </div>
         </div>
+        <div class="h-1/2dvh"/>
     </TwoColumn>
 
     <!-- Planning Phase. -->
@@ -130,23 +147,204 @@ const automationImporter = new GraphicsImporter(
         </div>
     </div>
 
+    <div class="h-1/4dvh"/>
+
+    <div class="hero">
+        <div class="hero-content flex-col lg:flex-row-reverse w-full">
+            <div class="basis-1/2 self-stretch">
+                <Image class="rounded-xl" src={SensapexRig} alt="Sensapex Rig"/>
+                <Article>
+                    <p>Sensapex Multiprobe rig</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl" src={MPMRig} alt="MPM Rig"/>
+                <Article>
+                    <p>New Scale MPM rig</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl" src={MISRig} alt="MIS Rig"/>
+                <Article>
+                    <p>New Scale MIS rig</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl" src={ScientificaManipulator}
+                       alt="Scientifica InVivoStar Micromanipulator"/>
+                <Article>
+                    <p>Scientifica InVivoStar Micromanipulator</p>
+                </Article>
+            </div>
+
+            <div class="basis-1/2 self-stretch">
+                <div class="sticky top-1/3">
+                    <Article>
+                        <h2>Let the robots do the heavy lifting</h2>
+                        <h3>Pinpoint can control neurosurgery robotic manipulators to automatically run your plans.</h3>
+                        <ul>
+                            <li>Sensapex uMp-4</li>
+                            <li>Sensapex uMp-3</li>
+                            <li>New Scale MPM Rig</li>
+                            <li>New Scale MIS Rig</li>
+                            <li>Scientifica InVivoStar Micromanipulator/li>
+                            <li>LabMaker</li>
+                            <li>More can be added through <a href="https://ephys-link.virtualbrainlab.org/">Ephys
+                                Link</a></li>
+                        </ul>
+                    </Article>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <TwoColumn>
         <Graphics imageMetadatas={automationImporter.getImageMetadatas()} slot="graphics"/>
 
         <div class="h-1/4dvh"/>
         <div class="h-3/2dvh">
-            <div class="sticky top-1/4">
+            <div class="sticky top-1/3">
                 <Article>
-                    <h2>Let the robots do the heavy lifting</h2>
-                    <h3>Pinpoint can control neurosurgery robotic manipulators to automatically run your plans.</h3>
-                    <p>Below: Sensapex Multiprobe <span class="italic">in vivo</span> rig and New Scale MPM rig.</p>
-                    <Image class="rounded-xl w-3/4" src={SensapexRig} alt="Sensapex Rig"/>
-                    <Image class="rounded-xl w-3/4" src={MPMRig} alt="MPM Rig"/>
+                    <h2>Automation improves accuracy and efficiency</h2>
+                    <h3>Robotic manipulators can make highly precise movements and perform multiple tasks in parallel.
+                        These are important for enabling large-scale studies.</h3>
                 </Article>
             </div>
         </div>
         <div class="h-1/4dvh"/>
     </TwoColumn>
+
+    <div class="hero">
+        <div class="hero-content flex-col lg:flex-row-reverse w-full">
+            <div class="basis-1/2 self-stretch">
+                <Image class="rounded-xl" src={Parallax} alt="Parallax tracking view"/>
+                <Article>
+                    <p>Parallax computer vision tracking system. Two electrophysiology probes are tracked and marked
+                        with red crosses.</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl" src={Durations} alt="Automation durations"/>
+                <Article>
+                    <p>Automation is measurably faster than traditional methods. The red dot is the median duration of
+                        automated 2-probe electrophysiology insertion which is significantly lower than the median
+                        duration for manual insertions.</p>
+                </Article>
+            </div>
+
+            <div class="basis-1/2 self-stretch">
+                <div class="sticky top-1/3">
+                    <Article>
+                        <h2>The future of neuroscience is automation</h2>
+                        <h3>We are working with the Allen Institute to develop computer vision assisted systems to
+                            enable completely unattended surgery automation.</h3>
+                        <p>The reduction in human error and increase in efficiency will enable neuroscientists to scale
+                            up
+                            their work to new heights, unlocking studies and surgeries previously deemed impossible.</p>
+                    </Article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Outreach -->
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="h-1/4dvh"/>
+            <Article>
+                <h1 class="text-center">Grow the Community with<br/><span class="text-primary">Pinpoint</span>
+                </h1>
+            </Article>
+            <div class="h-1/4dvh"/>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content flex-col lg:flex-row-reverse w-full">
+            <div class="basis-1/2 self-stretch">
+                <Image class="rounded-xl" src={TeachingPinpoint} alt="Teaching Pinpoint"/>
+                <Article>
+                    <p>Dr. Birman teaching Pinpoint to researchers at the Allen Institute 2024 Neuropixels and OpenScope
+                        Workshop</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl" src={UsingPinpoint} alt="Using Pinpoint"/>
+                <Article>
+                    <p>A workshop attendee using Pinpoint in their laptop browser</p>
+                </Article>
+            </div>
+
+            <div class="basis-1/2 self-stretch">
+                <div class="sticky top-1/3">
+                    <Article>
+                        <h2>Neuroscience for everyone</h2>
+                        <h3>Pinpoint is free software for everyone to use. We teach and share the platform at various
+                            workshops and conferences</h3>
+                        <ul>
+                            <li><a href="https://www.sfn.org/meetings/neuroscience-2024">Society for Neuroscience
+                                Conference 2022, 2023, and 2024</a></li>
+                            <li><a href="https://alleninstitute.org/events/2024-neuropixels-and-openscope-workshop/">Allen
+                                Institute Neuropixels and OpenScope Workshop</a></li>
+                            <li><a href="https://www.ucl.ac.uk/neuropixels/training/2024-neuropixels-course">UCL
+                                Neuropixels Course</a></li>
+                        </ul>
+                    </Article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="h-1/4dvh"/>
+
+    <div class="hero">
+        <div class="hero-content flex-col lg:flex-row-reverse w-full">
+            <div class="basis-1/2 self-stretch">
+                <div class="avatar-group -space-x-6 rtl:space-x-reverse">
+                    <div class="avatar">
+                        <div class="w-12">
+                            <Image src={Kenneth} alt="Kenneth"/>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="size-12">
+                            <Image src={Jasmine} alt="Jasmine"/>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="size-12">
+                            <Image src={Qiqi} alt="Qiqi"/>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class=size-12">
+                            <Image src={Selina} alt="Selina"/>
+                        </div>
+                    </div>
+                    <div class="avatar">
+                        <div class="size-12">
+                            <Image src={Kai} alt="Kai"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="basis-1/2 self-stretch">
+                <div class="sticky top-1/3">
+                    <Article>
+                        <h2>Fostering the next generation</h2>
+                        <h3>Pinpoint was developed with the help of a diverse group of undergraduate researchers</h3>
+                    </Article>
+                </div>
+            </div>
+        </div>
+    </div>
 </Layout>
 
 <style>
