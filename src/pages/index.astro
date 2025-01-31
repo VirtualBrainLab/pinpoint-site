@@ -8,11 +8,13 @@ import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
 import type {DefaultImageMetadata} from "../scripts/types";
 
+// Import static images.
 import MISRig from "../assets/manipulators/mis-rig.avif";
 import MPMRig from "../assets/manipulators/mpm-rig.avif";
 import ScientificaManipulator from "../assets/manipulators/scientifica-manipulator.avif";
-// Import static images.
 import SensapexRig from "../assets/manipulators/sensapex-rig.avif";
+import Parallax from "../assets/future/parallax.avif"
+import Durations from "../assets/future/durations.avif"
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
@@ -143,28 +145,28 @@ const automationImporter = new GraphicsImporter(
     <div class="hero">
         <div class="hero-content flex-col lg:flex-row-reverse w-full">
             <div class="basis-1/2 self-stretch">
-                <Image class="rounded-xl w-3/4" src={SensapexRig} alt="Sensapex Rig"/>
+                <Image class="rounded-xl" src={SensapexRig} alt="Sensapex Rig"/>
                 <Article>
                     <p>Sensapex Multiprobe rig</p>
                 </Article>
 
                 <br/>
 
-                <Image class="rounded-xl w-3/4" src={MPMRig} alt="MPM Rig"/>
+                <Image class="rounded-xl" src={MPMRig} alt="MPM Rig"/>
                 <Article>
                     <p>New Scale MPM rig</p>
                 </Article>
 
                 <br/>
 
-                <Image class="rounded-xl w-3/4" src={MISRig} alt="MIS Rig"/>
+                <Image class="rounded-xl" src={MISRig} alt="MIS Rig"/>
                 <Article>
                     <p>New Scale MIS rig</p>
                 </Article>
 
                 <br/>
 
-                <Image class="rounded-xl w-3/4" src={ScientificaManipulator}
+                <Image class="rounded-xl" src={ScientificaManipulator}
                        alt="Scientifica InVivoStar Micromanipulator"/>
                 <Article>
                     <p>Scientifica InVivoStar Micromanipulator</p>
@@ -207,6 +209,40 @@ const automationImporter = new GraphicsImporter(
         </div>
         <div class="h-1/4dvh"/>
     </TwoColumn>
+
+    <div class="hero">
+        <div class="hero-content flex-col lg:flex-row-reverse w-full">
+            <div class="basis-1/2 self-stretch">
+                <Image class="rounded-xl" src={Parallax} alt="Parallax tracking view"/>
+                <Article>
+                    <p>Parallax computer vision tracking system. Two electrophysiology probes are tracked and marked
+                        with red crosses.</p>
+                </Article>
+
+                <br/>
+
+                <Image class="rounded-xl" src={Durations} alt="Automation durations"/>
+                <Article>
+                    <p>Automation is measurably faster than traditional methods. The red dot is the median duration of
+                        automated 2-probe electrophysiology insertion which is significantly lower than the median
+                        duration for manual insertions.</p>
+                </Article>
+            </div>
+
+            <div class="basis-1/2 self-stretch">
+                <div class="sticky top-1/3">
+                    <Article>
+                        <h2>The future of neuroscience is automation</h2>
+                        <h3>We are working with the Allen Institute to develop computer vision assisted systems to
+                            enable completely unattended surgery automation.</h3>
+                        <p>The reduction in human error and increase in efficiency will enable neuroscientists to scale
+                            up
+                            their work to new heights, unlocking studies and surgeries previously deemed impossible.</p>
+                    </Article>
+                </div>
+            </div>
+        </div>
+    </div>
 </Layout>
 
 <style>
