@@ -1,12 +1,12 @@
 ---
-import { Image } from "astro:assets";
+import {Image} from "astro:assets";
 import Article from "../components/Article.astro";
 import TwoColumn from "../components/TwoColumn.astro";
 import Layout from "../layouts/Layout.astro";
 
 import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
-import type { DefaultImageMetadata } from "../scripts/types";
+import type {DefaultImageMetadata} from "../scripts/types";
 
 import Durations from "../assets/future/durations.avif";
 import Parallax from "../assets/future/parallax.avif";
@@ -24,19 +24,20 @@ import Kai from "../assets/people/kai.avif";
 import Kenneth from "../assets/people/kenneth.avif";
 import Qiqi from "../assets/people/qiqi.avif";
 import Selina from "../assets/people/selina.avif";
+import MadeWithUnity from "../assets/outreach/made-with-unity.avif"
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
 );
 const equipmentImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
 );
 const insertionImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
 );
 const automationImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
 );
 ---
 
@@ -131,7 +132,8 @@ const automationImporter = new GraphicsImporter(
             <div class="sticky top-1/3">
                 <Article>
                     <h2>See the brain in detail</h2>
-                    <p>Extract brain surface coordinates for surgical targeting, export brain region information, and explore planar slices in each brain atlas.</p>
+                    <p>Extract brain surface coordinates for surgical targeting, export brain region information, and
+                        explore planar slices in each brain atlas.</p>
                 </Article>
             </div>
         </div>
@@ -212,7 +214,8 @@ const automationImporter = new GraphicsImporter(
             <div class="sticky top-1/3">
                 <Article>
                     <h2>Automation improves accuracy and efficiency</h2>
-                    <p>Robotic manipulators make movements with sub-micrometer precision and perform multiple tasks in parallel, critical improvements for enabling whole-brain neural recording.</p>
+                    <p>Robotic manipulators make movements with sub-micrometer precision and perform multiple tasks in
+                        parallel, critical improvements for enabling whole-brain neural recording.</p>
                 </Article>
             </div>
         </div>
@@ -232,7 +235,8 @@ const automationImporter = new GraphicsImporter(
 
                 <Image class="rounded-xl" src={Durations} alt="Automation durations"/>
                 <Article>
-                    <p>Automation is measurably faster than traditional methods. The median duration of automated insertions (red dot) is significantly faster than the median
+                    <p>Automation is measurably faster than traditional methods. The median duration of automated
+                        insertions (red dot) is significantly faster than the median
                         duration for manual insertions (black dot).</p>
                 </Article>
             </div>
@@ -241,7 +245,8 @@ const automationImporter = new GraphicsImporter(
                 <div class="sticky top-1/3">
                     <Article>
                         <h2>The future is fully automated</h2>
-                        <h3>In collaboration with the Allen Institute we will develop computer vision assisted systems to
+                        <h3>In collaboration with the Allen Institute we will develop computer vision assisted systems
+                            to
                             enable unattended surgery.</h3>
                         <p>The reduction in human error and increase in efficiency will enable neuroscientists to scale
                             up
@@ -289,7 +294,8 @@ const automationImporter = new GraphicsImporter(
                         <h2>Neuroscience is for everyone</h2>
                         <h3>Pinpoint is free software available for everyone to use.</h3>
                         <p>Run Pinpoint from a web browser, a desktop computer, or a handheld gaming console!</p>
-                        <p>Learn about Pinpoint and discover the platform at three workshops and conferences every year:</p>
+                        <p>Learn about Pinpoint and discover the platform at three workshops and conferences every
+                            year:</p>
                         <ul>
                             <li><a href="https://www.sfn.org/meetings/neuroscience-2025">Society for Neuroscience
                                 Conference</a></li>
@@ -343,7 +349,8 @@ const automationImporter = new GraphicsImporter(
                 <div class="sticky top-1/3">
                     <Article>
                         <h2>Fostering the next generation</h2>
-                        <p>Developing Pinpoint has been an opportunity for a diverse group of undergraduates to discover a passion for research, neuroscience, and 3D development.</p>
+                        <p>Developing Pinpoint has been an opportunity for a diverse group of undergraduates to discover
+                            a passion for research, neuroscience, and 3D development.</p>
                         <ul>
                             <li>Kenneth Yang (WRF Fellow, Mary Gates Scholar)</li>
                             <li>Jasmine Schoch (SURFiN Fellow)</li>
@@ -384,7 +391,8 @@ const automationImporter = new GraphicsImporter(
                     <h2>Built by everyone</h2>
                     <h3>Pinpoint is open-source software meaning anyone can review our code, report problems, and
                         submit changes.</h3>
-                    <p>The open nature of our code also ensures it will still be maintainable long after we achieve our main goals.</p>
+                    <p>The open nature of our code also ensures it will still be maintainable long after we achieve our
+                        main goals.</p>
                 </Article>
             </div>
         </div>
@@ -392,6 +400,7 @@ const automationImporter = new GraphicsImporter(
 
     <div class="h-1/4dvh"/>
 
+    <!-- Website. -->
     <div class="hero">
         <div class="hero-content flex-col lg:flex-row-reverse w-full">
             <div class="basis-1/2 self-stretch">
@@ -401,7 +410,7 @@ const automationImporter = new GraphicsImporter(
                              alt="Pinpoint GitHub Repository"/>
                     </figure>
                     <div class="card-body">
-                        <h2 class="card-title">VBL — Virtual Brain Lab</h2>
+                        <h2 class="card-title">VBL - Virtual Brain Lab</h2>
                         <p>We develop 3D visualization tools for experimenting with, exploring, and simulating
                             brains.</p>
                         <div class="card-actions justify-end">
@@ -422,38 +431,37 @@ const automationImporter = new GraphicsImporter(
 
     <div class="h-1/4dvh"/>
 
+    <!-- Contact. -->
     <div class="hero">
-        <div class="hero-content text-center">
-            <div>
-                <Article>
-                    <h1>Made with Unity</h1>
-                    <h2>Actively Maintained by:</h2>
-                </Article>
+        <div class="hero-content flex-col justify-center text-center">
+            <Article>
+                <Image src={MadeWithUnity} alt="Made with Unity"/>
+                <h2>Core Team:</h2>
+            </Article>
 
-                <br/>
+            <br/>
 
-                <div class="flex space-x-8">
-                    <a href="mailto:kjy5@uw.edu">
-                        <div class="avatar">
-                            <div class="w-48 rounded-full">
-                                <img src={Kenneth.src} alt="Kenneth J. Yang"/>
-                            </div>
+            <div class="flex space-x-8">
+                <a href="mailto:kjy5@uw.edu">
+                    <div class="avatar">
+                        <div class="w-48 rounded-full">
+                            <img src={Kenneth.src} alt="Kenneth J. Yang"/>
                         </div>
-                        <Article>
-                            <p><strong>Kenneth J. Yang</strong><br/>University of Washington</p>
-                        </Article>
-                    </a>
-                    <a href="mailto:daniel.birman@alleninsitute.org">
-                        <div class="avatar">
-                            <div class="w-48 rounded-full">
-                                <img src={Dan.src} alt="Dr. Daniel Birman"/>
-                            </div>
+                    </div>
+                    <Article>
+                        <p><strong>Kenneth J. Yang</strong><br/>University of Washington</p>
+                    </Article>
+                </a>
+                <a href="mailto:daniel.birman@alleninsitute.org">
+                    <div class="avatar">
+                        <div class="w-48 rounded-full">
+                            <img src={Dan.src} alt="Dr. Daniel Birman"/>
                         </div>
-                        <Article>
-                            <p><strong>Daniel Birman, PhD</strong><br/>Allen Institute</p>
-                        </Article>
-                    </a>
-                </div>
+                    </div>
+                    <Article>
+                        <p><strong>Daniel Birman, PhD</strong><br/>Allen Institute</p>
+                    </Article>
+                </a>
             </div>
         </div>
     </div>
