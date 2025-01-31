@@ -46,6 +46,13 @@ jobs:
       - name: 🔨 Build
         run: pnpm build
 
+      # Upload artifact if requested
+      - name: ⬆️ Upload artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist'
+
 
   # Only deploy on main.
   deploy-website:
@@ -62,11 +69,6 @@ jobs:
     needs: build-website
 
     steps:
-      # Upload artifact if requested
-      - name: ⬆️ Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'dist'
 
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
