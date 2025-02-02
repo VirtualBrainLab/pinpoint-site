@@ -1,7 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import Article from "../components/Article.astro";
+import HeroText from "../components/HeroText.astro";
 import TwoColumn from "../components/TwoColumn.astro";
+import TwoColumnVideo from "../components/TwoColumnVideo.astro";
 import Layout from "../layouts/Layout.astro";
 
 import Graphics from "../components/Graphics.astro";
@@ -44,7 +46,7 @@ const automationImporter = new GraphicsImporter(
 
 <Layout imageSrcs={[introImporter.getImageSrcs(), equipmentImporter.getImageSrcs(), insertionImporter.getImageSrcs(), automationImporter.getImageSrcs()]}>
     <!-- Pinpoint Intro Sequence. -->
-    <TwoColumn>
+    <TwoColumnVideo>
         <Graphics imageMetadatas={introImporter.getImageMetadatas()} alt="Brain opening to reveal multiple regions"
                   slot="graphics"/>
 
@@ -69,7 +71,6 @@ const automationImporter = new GraphicsImporter(
         <!-- Goal. -->
         <div class="h-dvh" id="learn-more">
             <div class="sticky top-1/3">
-                <!--<span class="anchor" id="goal"></span>-->
                 <Article>
                     <h1>Pinpoint aims to advance large-scale neuroscience research with intuitive browser-based
                         planning and automation tools.
@@ -93,20 +94,18 @@ const automationImporter = new GraphicsImporter(
             </div>
         </div>
         <div class="h-1/2dvh"/>
-    </TwoColumn>
+    </TwoColumnVideo>
 
     <!-- Planning Phase. -->
 
-    <div class="hero">
-        <div class="hero-content">
-            <Article>
-                <h1 class="text-center">Plan Your Next Surgery with<br/><span class="text-primary">Pinpoint</span></h1>
-            </Article>
-        </div>
-    </div>
+    <Spacer/>
+    <HeroText>
+        <h1 class="text-center">Plan Your Next Surgery with<br/><span class="text-primary">Pinpoint</span></h1>
+    </HeroText>
+    <Spacer/>
 
     <!-- Simulate Equipment. -->
-    <TwoColumn>
+    <TwoColumnVideo>
         <Graphics imageMetadatas={equipmentImporter.getImageMetadatas()} alt="Showcase of equipment pinpoint supports"
                   slot="graphics"/>
 
@@ -121,10 +120,10 @@ const automationImporter = new GraphicsImporter(
             </div>
         </div>
         <div class="h-1/2dvh"/>
-    </TwoColumn>
+    </TwoColumnVideo>
 
     <!-- Brain in detail. -->
-    <TwoColumn>
+    <TwoColumnVideo>
         <Graphics imageMetadatas={insertionImporter.getImageMetadatas()}
                   alt="Electrophysiology probe inserted into brain" slot="graphics"/>
 
@@ -139,20 +138,18 @@ const automationImporter = new GraphicsImporter(
             </div>
         </div>
         <div class="h-1/2dvh"/>
-    </TwoColumn>
+    </TwoColumnVideo>
 
     <!-- Automation Phase -->
 
-    <div class="hero">
-        <div class="hero-content">
-            <Article>
-                <h1 class="text-center">Run Your Plan with<br/><span class="text-primary">Pinpoint Automation</span>
-                </h1>
-            </Article>
-        </div>
-    </div>
+    <Spacer/>
+    <HeroText>
+        <h1 class="text-center">Run Your Plan with<br/><span class="text-primary">Pinpoint Automation</span>
+        </h1>
+    </HeroText>
+    <Spacer/>
 
-    <TwoColumn>
+    <TwoColumnVideo>
         <Graphics imageMetadatas={automationImporter.getImageMetadatas()}
                   alt="Automated insertion in pinpoint synced with real probe" slot="graphics"/>
 
@@ -168,274 +165,222 @@ const automationImporter = new GraphicsImporter(
             </div>
         </div>
         <Spacer/>
-    </TwoColumn>
-
-    <div class="hero">
-        <div class="hero-content flex-col lg:flex-row-reverse w-full">
-            <div class="basis-1/2 self-stretch">
-                <Image class="rounded-xl" src={SensapexRig} alt="Sensapex Rig"/>
-                <Article>
-                    <p>Sensapex Multiprobe rig</p>
-                </Article>
-
-                <br/>
-
-                <Image class="rounded-xl" src={MPMRig} alt="MPM Rig"/>
-                <Article>
-                    <p>New Scale MPM rig</p>
-                </Article>
-
-                <br/>
-
-                <Image class="rounded-xl" src={MISRig} alt="MIS Rig"/>
-                <Article>
-                    <p>New Scale MIS rig</p>
-                </Article>
-
-                <br/>
-
-                <Image class="rounded-xl" src={ScientificaManipulator}
-                       alt="Scientifica InVivoStar Micromanipulator"/>
-                <Article>
-                    <p>Scientifica InVivoStar Micromanipulator</p>
-                </Article>
-            </div>
-
-            <div class="basis-1/2 self-stretch">
-                <div class="sticky top-1/3">
-                    <Article>
-                        <h2>Leave the heavy lifting to the robots</h2>
-                        <h3>Pinpoint can control robotic rigs to automatically perform your surgery.</h3>
-                        <p>Support for platforms can be added through the <a
-                                href="https://ephys-link.virtualbrainlab.org/">Ephys
-                            Link</a> project.</p>
-                    </Article>
-                </div>
-            </div>
-        </div>
-    </div>
+    </TwoColumnVideo>
 
     <Spacer/>
 
-    <div class="hero">
-        <div class="hero-content flex-col lg:flex-row-reverse w-full">
-            <div class="basis-1/2 self-stretch">
-                <Image class="rounded-xl" src={Parallax} alt="Parallax tracking view"/>
-                <Article>
-                    <p>Parallax computer vision tracking system. Two electrophysiology probes are tracked and marked
-                        with red crosses.</p>
-                </Article>
+    <TwoColumn>
+        <div slot="graphics">
+            <Image class="rounded-xl" src={SensapexRig} alt="Sensapex Rig"/>
+            <Article>
+                <p>Sensapex Multiprobe rig</p>
+            </Article>
 
-                <br/>
+            <br/>
 
-                <Image class="rounded-xl" src={Durations} alt="Automation durations"/>
-                <Article>
-                    <p>Automation is measurably faster than traditional methods. The median duration of automated
-                        insertions (red dot) is significantly faster than the median
-                        duration for manual insertions (black dot).</p>
-                </Article>
-            </div>
+            <Image class="rounded-xl" src={MPMRig} alt="MPM Rig"/>
+            <Article>
+                <p>New Scale MPM rig</p>
+            </Article>
 
-            <div class="basis-1/2 self-stretch">
-                <div class="sticky top-1/3">
-                    <Article>
-                        <h2>The future is fully automated</h2>
-                        <h3>In collaboration with the Allen Institute we will develop computer vision assisted systems
-                            to
-                            enable unattended surgery.</h3>
-                        <p>The reduction in human error and increase in efficiency will enable neuroscientists to scale
-                            up
-                            their work to new heights, unlocking studies and surgeries previously deemed impossible.</p>
-                    </Article>
-                </div>
-            </div>
+            <br/>
+
+            <Image class="rounded-xl" src={MISRig} alt="MIS Rig"/>
+            <Article>
+                <p>New Scale MIS rig</p>
+            </Article>
+
+            <br/>
+
+            <Image class="rounded-xl" src={ScientificaManipulator}
+                   alt="Scientifica InVivoStar Micromanipulator"/>
+            <Article>
+                <p>Scientifica InVivoStar Micromanipulator</p>
+            </Article>
         </div>
-    </div>
+
+        <h2>Leave the heavy lifting to the robots</h2>
+        <h3>Pinpoint can control robotic rigs to automatically perform your surgery.</h3>
+        <p>Support for platforms can be added through the <a
+                href="https://ephys-link.virtualbrainlab.org/">Ephys
+            Link</a> project.</p>
+    </TwoColumn>
+
+    <Spacer/>
+
+    <TwoColumn>
+        <div slot="graphics">
+            <Image class="rounded-xl" src={Parallax} alt="Parallax tracking view"/>
+            <Article>
+                <p>Parallax computer vision tracking system. Two electrophysiology probes are tracked and marked
+                    with red crosses.</p>
+            </Article>
+
+            <br/>
+
+            <Image class="rounded-xl" src={Durations} alt="Automation durations"/>
+            <Article>
+                <p>Automation is measurably faster than traditional methods. The median duration of automated
+                    insertions (red dot) is significantly faster than the median
+                    duration for manual insertions (black dot).</p>
+            </Article>
+        </div>
+
+        <h2>The future is fully automated</h2>
+        <h3>In collaboration with the Allen Institute we will develop computer vision assisted systems
+            to
+            enable unattended surgery.</h3>
+        <p>The reduction in human error and increase in efficiency will enable neuroscientists to scale
+            up
+            their work to new heights, unlocking studies and surgeries previously deemed impossible.</p>
+    </TwoColumn>
 
     <!-- Outreach -->
 
     <Spacer/>
-    <div class="hero">
-        <div class="hero-content">
-            <Article>
-                <h1 class="text-center">Grow the Community with<br/><span class="text-primary">Pinpoint</span>
-                </h1>
-            </Article>
-        </div>
-    </div>
+    <HeroText>
+        <h1 class="text-center">Grow the Community with<br/><span class="text-primary">Pinpoint</span>
+        </h1>
+    </HeroText>
     <Spacer/>
 
     <!-- Teaching. -->
-    <div class="hero">
-        <div class="hero-content flex-col lg:flex-row-reverse w-full">
-            <div class="basis-1/2 self-stretch">
-                <Image class="rounded-xl" src={TeachingPinpoint} alt="Teaching Pinpoint"/>
-                <Article>
-                    <p>Dr. Birman teaching Pinpoint to researchers at the Allen Institute 2024 Neuropixels and OpenScope
-                        Workshop.</p>
-                </Article>
+    <TwoColumn>
+        <div slot="graphics">
+            <Image class="rounded-xl" src={TeachingPinpoint} alt="Teaching Pinpoint"/>
+            <Article>
+                <p>Dr. Birman teaching Pinpoint to researchers at the Allen Institute 2024 Neuropixels and OpenScope
+                    Workshop.</p>
+            </Article>
 
-                <br/>
+            <br/>
 
-                <Image class="rounded-xl" src={UsingPinpoint} alt="Using Pinpoint"/>
-                <Article>
-                    <p>A workshop attendee using Pinpoint through their laptop browser.</p>
-                </Article>
-            </div>
-
-            <div class="basis-1/2 self-stretch">
-                <div class="sticky top-1/3">
-                    <Article>
-                        <h2>Neuroscience is for everyone</h2>
-                        <h3>Pinpoint is free software available for everyone to use.</h3>
-                        <p>Run Pinpoint from a web browser, a desktop computer, or a handheld gaming console!</p>
-                        <p>Learn about Pinpoint and discover the platform at three workshops and conferences every
-                            year:</p>
-                        <ul>
-                            <li><a href="https://www.sfn.org/meetings/neuroscience-2025">Society for Neuroscience
-                                Conference</a></li>
-                            <li><a href="https://alleninstitute.org/events/2025-neuropixels-and-openscope-workshop/">Allen
-                                Institute Neuropixels and OpenScope Workshop</a></li>
-                            <li><a href="https://www.ucl.ac.uk/neuropixels/training/2024-neuropixels-course">UCL
-                                Neuropixels Course</a></li>
-                        </ul>
-                    </Article>
-                </div>
-            </div>
+            <Image class="rounded-xl" src={UsingPinpoint} alt="Using Pinpoint"/>
+            <Article>
+                <p>A workshop attendee using Pinpoint through their laptop browser.</p>
+            </Article>
         </div>
-    </div>
+
+        <h2>Neuroscience is for everyone</h2>
+        <h3>Pinpoint is free software available for everyone to use.</h3>
+        <p>Run Pinpoint from a web browser, a desktop computer, or a handheld gaming console!</p>
+        <p>Learn about Pinpoint and discover the platform at three workshops and conferences every
+            year:</p>
+        <ul>
+            <li><a href="https://www.sfn.org/meetings/neuroscience-2025">Society for Neuroscience
+                Conference</a></li>
+            <li><a href="https://alleninstitute.org/events/2025-neuropixels-and-openscope-workshop/">Allen
+                Institute Neuropixels and OpenScope Workshop</a></li>
+            <li><a href="https://www.ucl.ac.uk/neuropixels/training/2024-neuropixels-course">UCL
+                Neuropixels Course</a></li>
+        </ul>
+    </TwoColumn>
 
     <Spacer/>
 
     <!-- Undergrads. -->
-    <div class="hero">
-        <div class="hero-content flex-col lg:flex-row-reverse w-full">
-            <div class="basis-1/2 self-stretch">
-                <div class="avatar-group -space-x-6 rtl:space-x-reverse">
-                    <div class="avatar">
-                        <div class="w-auto">
-                            <img src={Kenneth.src} alt="Kenneth"/>
-                        </div>
-                    </div>
-                    <div class="avatar">
-                        <div class="w-auto">
-                            <img src={Jasmine.src} alt="Jasmine"/>
-                        </div>
-                    </div>
-                    <div class="avatar">
-                        <div class="w-auto">
-                            <img src={Qiqi.src} alt="Qiqi"/>
-                        </div>
-                    </div>
-                    <div class="avatar">
-                        <div class="w-auto">
-                            <img src={Selina.src} alt="Selina"/>
-                        </div>
-                    </div>
-                    <div class="avatar">
-                        <div class="w-auto">
-                            <img src={Kai.src} alt="Kai"/>
-                        </div>
-                    </div>
+    <TwoColumn>
+        <div class="avatar-group -space-x-6 rtl:space-x-reverse" slot="graphics">
+            <div class="avatar">
+                <div class="w-auto">
+                    <img src={Kenneth.src} alt="Kenneth"/>
                 </div>
             </div>
-
-            <div class="basis-1/2 self-stretch">
-                <div class="sticky top-1/3">
-                    <Article>
-                        <h2>Fostering the next generation</h2>
-                        <p>Developing Pinpoint has been an opportunity for a diverse group of undergraduates to discover
-                            a passion for research, neuroscience, and 3D development.</p>
-                        <ul>
-                            <li>Kenneth Yang (<a
-                                    href="https://www.washington.edu/undergradresearch/academic-year-programs/wrff/">WRF
-                                Fellow</a>, <a href="https://expd.uw.edu/mge/apply/research/">Mary Gates Scholar</a>)
-                            </li>
-                            <li>Jasmine Schoch (<a
-                                    href="https://www.simonsfoundation.org/grant/shenoy-undergraduate-research-fellowship-in-neuroscience-surfin/">SURFiN
-                                Fellow</a>)
-                            </li>
-                            <li>Qiqi Liang</li>
-                            <li>Selina Li</li>
-                            <li>Kai Nylund (<a href="https://expd.uw.edu/mge/apply/research/">Mary Gates Scholar</a>)
-                            </li>
-                        </ul>
-                    </Article>
+            <div class="avatar">
+                <div class="w-auto">
+                    <img src={Jasmine.src} alt="Jasmine"/>
+                </div>
+            </div>
+            <div class="avatar">
+                <div class="w-auto">
+                    <img src={Qiqi.src} alt="Qiqi"/>
+                </div>
+            </div>
+            <div class="avatar">
+                <div class="w-auto">
+                    <img src={Selina.src} alt="Selina"/>
+                </div>
+            </div>
+            <div class="avatar">
+                <div class="w-auto">
+                    <img src={Kai.src} alt="Kai"/>
                 </div>
             </div>
         </div>
-    </div>
+
+        <h2>Fostering the next generation</h2>
+        <p>Developing Pinpoint has been an opportunity for a diverse group of undergraduates to discover
+            a passion for research, neuroscience, and 3D development.</p>
+        <ul>
+            <li>Kenneth Yang (<a
+                    href="https://www.washington.edu/undergradresearch/academic-year-programs/wrff/">WRF
+                Fellow</a>, <a href="https://expd.uw.edu/mge/apply/research/">Mary Gates Scholar</a>)
+            </li>
+            <li>Jasmine Schoch (<a
+                    href="https://www.simonsfoundation.org/grant/shenoy-undergraduate-research-fellowship-in-neuroscience-surfin/">SURFiN
+                Fellow</a>)
+            </li>
+            <li>Qiqi Liang</li>
+            <li>Selina Li</li>
+            <li>Kai Nylund (<a href="https://expd.uw.edu/mge/apply/research/">Mary Gates Scholar</a>)
+            </li>
+        </ul>
+    </TwoColumn>
 
     <Spacer/>
 
     <!-- Open Source. -->
-    <div class="hero">
-        <div class="hero-content flex-col lg:flex-row-reverse w-full">
-            <div class="basis-1/2 self-stretch">
-                <div class="card lg:card-side bg-base-200">
-                    <figure>
-                        <img src="https://repository-images.githubusercontent.com/439779355/697a35bd-3ae0-4fd1-b7c5-fb9471189739"
-                             alt="Pinpoint GitHub Repository"/>
-                    </figure>
-                    <div class="card-body">
-                        <h2 class="card-title">GitHub - VirtualBrainLab/Pinpoint</h2>
-                        <p>Multi-probe trajectory planning in an intuitive 3D environment</p>
-                        <div class="card-actions justify-end">
-                            <a href="https://github.com/VirtualBrainLab/Pinpoint" class="btn btn-primary">Visit the
-                                Repository</a>
-                        </div>
-                    </div>
+    <TwoColumn>
+        <div class="card lg:card-side bg-base-200" slot="graphics">
+            <figure>
+                <img src="https://repository-images.githubusercontent.com/439779355/697a35bd-3ae0-4fd1-b7c5-fb9471189739"
+                     alt="Pinpoint GitHub Repository"/>
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">GitHub - VirtualBrainLab/Pinpoint</h2>
+                <p>Multi-probe trajectory planning in an intuitive 3D environment</p>
+                <div class="card-actions justify-end">
+                    <a href="https://github.com/VirtualBrainLab/Pinpoint" class="btn btn-primary">Visit the
+                        Repository</a>
                 </div>
             </div>
-
-            <div class="basis-1/2 self-stretch">
-                <Article>
-                    <h2>Built by everyone</h2>
-                    <h3>Pinpoint is open-source software meaning anyone can review our code, report problems, and
-                        submit changes.</h3>
-                    <p>The open nature of our code also ensures it will still be maintainable long after we achieve our
-                        main goals.</p>
-                </Article>
-            </div>
         </div>
-    </div>
+
+        <h2>Built by everyone</h2>
+        <h3>Pinpoint is open-source software meaning anyone can review our code, report problems, and
+            submit changes.</h3>
+        <p>The open nature of our code also ensures it will still be maintainable long after we achieve our
+            main goals.</p>
+    </TwoColumn>
 
     <Spacer/>
 
     <!-- Website. -->
-    <div class="hero">
-        <div class="hero-content flex-col lg:flex-row-reverse w-full">
-            <div class="basis-1/2 self-stretch">
-                <div class="card lg:card-side bg-base-200">
-                    <figure>
-                        <img src="https://virtualbrainlab.org/_images/vbl-header.png"
-                             alt="Pinpoint GitHub Repository"/>
-                    </figure>
-                    <div class="card-body">
-                        <h2 class="card-title">VBL - Virtual Brain Lab</h2>
-                        <p>We develop 3D visualization tools for experimenting with, exploring, and simulating
-                            brains.</p>
-                        <div class="card-actions justify-end">
-                            <a href="https://virtualbrainlab.org/" class="btn btn-primary">Visit our Website</a>
-                        </div>
-                    </div>
+    <TwoColumn>
+        <div class="card lg:card-side bg-base-200" slot="graphics">
+            <figure>
+                <img src="https://virtualbrainlab.org/_images/vbl-header.png"
+                     alt="Pinpoint GitHub Repository"/>
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">VBL - Virtual Brain Lab</h2>
+                <p>We develop 3D visualization tools for experimenting with, exploring, and simulating
+                    brains.</p>
+                <div class="card-actions justify-end">
+                    <a href="https://virtualbrainlab.org/" class="btn btn-primary">Visit our Website</a>
                 </div>
             </div>
-
-            <div class="basis-1/2 self-stretch">
-                <Article>
-                    <h2>Learn more about our projects</h2>
-                    <p>See what else we've made and get in contact with us!</p>
-                </Article>
-            </div>
         </div>
-    </div>
+
+        <h2>Learn more about our projects</h2>
+        <p>See what else we've made and get in contact with us!</p>
+    </TwoColumn>
 
     <Spacer/>
 
     <!-- Contact. -->
     <div class="hero">
-        <div class="hero-content flex-col justify-center text-center">
+        <div class="hero-content flex-col justify-center text-center p-0">
             <Article>
                 <Image src={MadeWithUnity} alt="Made with Unity"/>
                 <h2>Core Team:</h2>
@@ -467,6 +412,8 @@ const automationImporter = new GraphicsImporter(
             </div>
         </div>
     </div>
+    
+    <Spacer/>
 </Layout>
 
 <style>
