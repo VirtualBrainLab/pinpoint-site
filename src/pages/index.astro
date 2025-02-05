@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import {Image} from "astro:assets";
 import Article from "../components/Article.astro";
 import HeroText from "../components/HeroText.astro";
 import TwoColumn from "../components/TwoColumn.astro";
@@ -8,7 +8,7 @@ import Layout from "../layouts/Layout.astro";
 
 import Graphics from "../components/Graphics.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
-import type { DefaultImageMetadata } from "../scripts/types";
+import type {DefaultImageMetadata} from "../scripts/types";
 
 import Durations from "../assets/future/durations.avif";
 import Parallax from "../assets/future/parallax.avif";
@@ -31,16 +31,16 @@ import Spacer from "../components/Spacer.astro";
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
 );
 const equipmentImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
 );
 const insertionImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
 );
 const automationImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
 );
 ---
 
@@ -61,9 +61,13 @@ const automationImporter = new GraphicsImporter(
 
                 <br/>
 
-                <div class="grid grid-cols-2 gap-2 max-w-sm">
+                <div class="flex gap-2">
                     <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
-                    <a class="btn" href="https://virtualbrainlab.org/pinpoint/installation_and_use.html" target="_blank" rel="noopener noreferrer">Read the Docs</a>
+                    <a class="btn" href="https://virtualbrainlab.org/pinpoint/installation_and_use.html" target="_blank"
+                       rel="noopener noreferrer">Read the Documentation</a>
+                </div>
+
+                <div class="absolute bottom-20">
                     <Article>
                         <p>Scroll to learn more...</p>
                     </Article>
@@ -415,7 +419,7 @@ const automationImporter = new GraphicsImporter(
             </div>
         </div>
     </div>
-    
+
     <Spacer/>
 </Layout>
 
