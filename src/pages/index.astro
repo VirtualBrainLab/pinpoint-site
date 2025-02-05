@@ -7,13 +7,13 @@ import TwoColumnVideo from "../components/TwoColumnVideo.astro";
 import Layout from "../layouts/Layout.astro";
 
 import Graphics from "../components/Graphics.astro";
+import Spacer from "../components/Spacer.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
 import type { DefaultImageMetadata } from "../scripts/types";
 
 import Durations from "../assets/future/durations.avif";
 import Parallax from "../assets/future/parallax.avif";
-
-// Import static images.
+import UfhTitle from "../assets/future/ufh-title.avif";
 import MISRig from "../assets/manipulators/mis-rig.avif";
 import MPMRig from "../assets/manipulators/mpm-rig.avif";
 import ScientificaManipulator from "../assets/manipulators/scientifica-manipulator.avif";
@@ -27,7 +27,6 @@ import Kai from "../assets/people/kai.avif";
 import Kenneth from "../assets/people/kenneth.avif";
 import Qiqi from "../assets/people/qiqi.avif";
 import Selina from "../assets/people/selina.avif";
-import Spacer from "../components/Spacer.astro";
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
@@ -339,7 +338,7 @@ const automationImporter = new GraphicsImporter(
     <!-- Open Source. -->
     <TwoColumn>
         <div class="card lg:card-side bg-base-200" slot="graphics">
-            <figure>
+            <figure class="max-w-sm">
                 <img src="https://repository-images.githubusercontent.com/439779355/697a35bd-3ae0-4fd1-b7c5-fb9471189739"
                      alt="Pinpoint GitHub Repository"/>
             </figure>
@@ -365,7 +364,7 @@ const automationImporter = new GraphicsImporter(
     <!-- Website. -->
     <TwoColumn>
         <div class="card lg:card-side bg-base-200" slot="graphics">
-            <figure>
+            <figure class="max-w-sm">
                 <img src="https://virtualbrainlab.org/_images/vbl-header.png"
                      alt="Pinpoint GitHub Repository"/>
             </figure>
@@ -381,6 +380,27 @@ const automationImporter = new GraphicsImporter(
 
         <h2>Learn more about our projects</h2>
         <p>See what else we've made and get in contact with us!</p>
+    </TwoColumn>
+
+    <Spacer/>
+
+    <!-- What's next. -->
+    <TwoColumn>
+        <div class="card lg:card-side bg-base-200" slot="graphics">
+            <figure class="max-w-sm">
+                <Image src={UfhTitle} alt="Unity for Humanity Pitch Deck Title Slide"/>
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">Pinpoint Unity for Humanity 2025 Pitch Deck</h2>
+                <p>See what we are proposing to work on next.</p>
+                <div class="card-actions justify-end">
+                    <a href="/ufh-2025.pdf" class="btn btn-primary">Read the Proposal</a>
+                </div>
+            </div>
+        </div>
+
+        <h2>What's next for Pinpoint</h2>
+        <p>See our roadmap and goals for Pinpoint.</p>
     </TwoColumn>
 
     <Spacer/>
