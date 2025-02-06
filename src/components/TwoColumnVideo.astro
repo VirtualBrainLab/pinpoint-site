@@ -4,7 +4,7 @@
     <div class="hero-content flex-col lg:flex-row-reverse w-full pt-0 pb-0">
         <!-- Graphics side. -->
         <div class="basis-1/2 self-stretch">
-            <div class="large">
+            <div class="lg:(h-dvh sticky top-0 flex justify-center items-center)">
                 <slot name="graphics"/>
             </div>
         </div>
@@ -15,9 +15,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    .large {
-        @apply h-dvh sticky top-0 flex justify-center items-center;
-    }
-</style>
