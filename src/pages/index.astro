@@ -1,15 +1,15 @@
 ---
-import { Image } from "astro:assets";
+import {Image} from "astro:assets";
 import Article from "../components/Article.astro";
 import HeroText from "../components/HeroText.astro";
-import TwoColumn from "../components/TwoColumn.astro";
-import TwoColumnVideo from "../components/TwoColumnVideo.astro";
+import TextImagePair from "../components/TextImagePair.astro";
+import TextVideoPair from "../components/TextVideoPair.astro";
 import Layout from "../layouts/Layout.astro";
 
 import Graphics from "../components/Graphics.astro";
 import Spacer from "../components/Spacer.astro";
 import GraphicsImporter from "../scripts/graphics-importer";
-import type { DefaultImageMetadata } from "../scripts/types";
+import type {DefaultImageMetadata} from "../scripts/types";
 
 import Durations from "../assets/future/durations.avif";
 import Parallax from "../assets/future/parallax.avif";
@@ -28,26 +28,39 @@ import Kenneth from "../assets/people/kenneth.avif";
 import Qiqi from "../assets/people/qiqi.avif";
 import Selina from "../assets/people/selina.avif";
 
+import NeuropixelImage from "../assets/equipment/0000.avif";
+import Nanoject from "../assets/equipment/0024.avif";
+import Laser from "../assets/equipment/0046.avif";
+import Pipette from "../assets/equipment/0068.avif";
+import Insertion from "../assets/insertion/0084.avif";
+import IntroSplash from "../assets/intro/0015.avif";
+import IntroFull from "../assets/intro/0079.avif";
+import AutomationInsertion from "../assets/automation/0042.avif"
+
 // Import graphics.
 const introImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/intro/*.avif"),
 );
 const equipmentImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/equipment/*.avif"),
 );
 const insertionImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/insertion/*.avif"),
 );
 const automationImporter = new GraphicsImporter(
-	import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
+    import.meta.glob<DefaultImageMetadata>("/src/assets/automation/*.avif"),
 );
 ---
 
 <Layout imageSrcs={[introImporter.getImageSrcs(), equipmentImporter.getImageSrcs(), insertionImporter.getImageSrcs(), automationImporter.getImageSrcs()]}>
     <!-- Pinpoint Intro Sequence. -->
-    <TwoColumnVideo>
+    <TextVideoPair>
         <Graphics imageMetadatas={introImporter.getImageMetadatas()} alt="Brain opening to reveal multiple regions"
                   slot="graphics"/>
+
+        <!-- Intro image for small screens. -->
+        <Image class="lg:hidden aspect-square max-h-1/2dvh object-contain" src={IntroSplash}
+               alt="Human brain with electrophysiology probe"/>
 
         <!-- Titles. -->
         <div class="flex justify-center items-center lg:h-dvh">
@@ -56,25 +69,22 @@ const automationImporter = new GraphicsImporter(
                     <h1 class="text-primary">Pinpoint</h1>
                     <h2>Interactive 3D visualization and automation tools for neuroscience research and
                         surgery.</h2>
+                    <div class="flex gap-2">
+                        <a class="hidden lg:inline-flex btn btn-primary"
+                           href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
+                        <a class="btn" href="https://virtualbrainlab.org/pinpoint/installation_and_use.html"
+                           target="_blank"
+                           rel="noopener noreferrer">Read the Documentation</a>
+                    </div>
+                    <p>Scroll to learn more...</p>
                 </Article>
-
-                <br/>
-
-                <div class="flex gap-2">
-                    <a class="btn btn-primary" href="https://data.virtualbrainlab.org/Pinpoint/">Launch</a>
-                    <a class="btn" href="https://virtualbrainlab.org/pinpoint/installation_and_use.html" target="_blank"
-                       rel="noopener noreferrer">Read the Documentation</a>
-                </div>
-
-                <div class="hidden lg:block absolute bottom-20">
-                    <Article>
-                        <p>Scroll to learn more...</p>
-                    </Article>
-                </div>
             </div>
         </div>
 
-        <br class="lg:hidden"/>
+        <!-- Spacer for small screens. -->
+        <div class="lg:hidden">
+            <Spacer/>
+        </div>
 
         <!-- Goal. -->
         <div class="lg:h-dvh">
@@ -89,10 +99,19 @@ const automationImporter = new GraphicsImporter(
             </div>
         </div>
 
+        <!-- Spacer for small screens. -->
+        <div class="lg:hidden">
+            <Spacer/>
+        </div>
+
+        <!-- Full intro image. -->
+        <Image class="lg:hidden aspect-square object-contain" src={IntroFull}
+               alt="Human brain with 3 electrophysiology probes and multiple regions"/>
+
         <!-- Problem statement. -->
         <div class="hidden lg:block h-1/3dvh"/>
-        
-        <div class="h-3/2dvh">
+
+        <div class="lg:h-3/2dvh">
             <div class="sticky top-1/3">
                 <Article>
                     <h2>Human behavior engage multiple regions of the brain.</h2>
@@ -104,8 +123,8 @@ const automationImporter = new GraphicsImporter(
                 </Article>
             </div>
         </div>
-        <div class="h-1/2dvh"/>
-    </TwoColumnVideo>
+        <div class="hidden lg:block h-1/2dvh"/>
+    </TextVideoPair>
 
     <!-- Planning Phase. -->
 
@@ -116,12 +135,12 @@ const automationImporter = new GraphicsImporter(
     <Spacer/>
 
     <!-- Simulate Equipment. -->
-    <TwoColumnVideo>
+    <TextVideoPair>
         <Graphics imageMetadatas={equipmentImporter.getImageMetadatas()} alt="Showcase of equipment pinpoint supports"
                   slot="graphics"/>
 
-        <div class="h-1/3dvh"/>
-        <div class="h-3/2dvh">
+        <div class="hidden lg:block lg:h-1/3dvh"/>
+        <div class="lg:h-3/2dvh">
             <div class="sticky top-1/3">
                 <Article>
                     <h2>Simulate your equipment</h2>
@@ -130,16 +149,24 @@ const automationImporter = new GraphicsImporter(
                 </Article>
             </div>
         </div>
-        <div class="h-1/2dvh"/>
-    </TwoColumnVideo>
+        <div class="hidden lg:block lg:h-1/2dvh"/>
+
+        <!-- Equipment images for small screens. -->
+        <div class="lg:hidden flex flex-wrap gap-8">
+            <Image class="aspect-square object-contain" src={NeuropixelImage} alt="Neuropixels probe"/>
+            <Image class="aspect-square object-contain" src={Nanoject} alt="Nanoject"/>
+            <Image class="aspect-square object-contain" src={Laser} alt="2-photon laser"/>
+            <Image class="aspect-square object-contain" src={Pipette} alt="Pipette"/>
+        </div>
+    </TextVideoPair>
 
     <!-- Brain in detail. -->
-    <TwoColumnVideo>
+    <TextVideoPair>
         <Graphics imageMetadatas={insertionImporter.getImageMetadatas()}
                   alt="Electrophysiology probe inserted into brain" slot="graphics"/>
 
-        <div class="h-1/3dvh"/>
-        <div class="h-3/2dvh">
+        <div class="hidden lg:block lg:h-1/3dvh"/>
+        <div class="lg:h-3/2dvh">
             <div class="sticky top-1/3">
                 <Article>
                     <h2>See the brain in detail</h2>
@@ -148,8 +175,14 @@ const automationImporter = new GraphicsImporter(
                 </Article>
             </div>
         </div>
-        <div class="h-1/2dvh"/>
-    </TwoColumnVideo>
+        <div class="hidden lg:block lg:h-1/2dvh"/>
+
+        <div class="lg:hidden">
+            <Spacer/>
+            <Image class="lg:hidden aspect-square object-contain" src={Insertion}
+                   alt="Electrophysiology probe inserted into brain."/>
+        </div>
+    </TextVideoPair>
 
     <!-- Automation Phase -->
 
@@ -160,12 +193,14 @@ const automationImporter = new GraphicsImporter(
     </HeroText>
     <Spacer/>
 
-    <TwoColumnVideo>
+    <TextVideoPair>
         <Graphics imageMetadatas={automationImporter.getImageMetadatas()}
                   alt="Automated insertion in pinpoint synced with real probe" slot="graphics"/>
 
-        <Spacer/>
-        <div class="h-3/2dvh">
+        <div class="hidden lg:block">
+            <Spacer/>
+        </div>
+        <div class="lg:h-3/2dvh">
             <div class="sticky top-1/3">
                 <Article>
                     <h2>Automation improves accuracy and efficiency</h2>
@@ -176,11 +211,14 @@ const automationImporter = new GraphicsImporter(
             </div>
         </div>
         <Spacer/>
-    </TwoColumnVideo>
+
+        <Image class="lg:hidden aspect-square object-contain" src={AutomationInsertion}
+               alt="Ephys Link inserting a probe."/>
+    </TextVideoPair>
 
     <Spacer/>
 
-    <TwoColumn>
+    <TextImagePair>
         <div slot="graphics">
             <Image class="rounded-xl" src={SensapexRig} alt="Sensapex Rig"/>
             <Article>
@@ -215,11 +253,11 @@ const automationImporter = new GraphicsImporter(
         <p>Support for platforms can be added through the <a
                 href="https://ephys-link.virtualbrainlab.org/">Ephys
             Link</a> project.</p>
-    </TwoColumn>
+    </TextImagePair>
 
     <Spacer/>
 
-    <TwoColumn>
+    <TextImagePair>
         <div slot="graphics">
             <Image class="rounded-xl" src={Parallax} alt="Parallax tracking view"/>
             <Article>
@@ -244,7 +282,7 @@ const automationImporter = new GraphicsImporter(
         <p>The reduction in human error and increase in efficiency will enable neuroscientists to scale
             up
             their work to new heights, unlocking studies and surgeries previously deemed impossible.</p>
-    </TwoColumn>
+    </TextImagePair>
 
     <!-- Outreach -->
 
@@ -256,7 +294,7 @@ const automationImporter = new GraphicsImporter(
     <Spacer/>
 
     <!-- Teaching. -->
-    <TwoColumn>
+    <TextImagePair>
         <div slot="graphics">
             <Image class="rounded-xl" src={TeachingPinpoint} alt="Teaching Pinpoint"/>
             <Article>
@@ -285,12 +323,12 @@ const automationImporter = new GraphicsImporter(
             <li><a href="https://www.ucl.ac.uk/neuropixels/training/2024-neuropixels-course">UCL
                 Neuropixels Course</a></li>
         </ul>
-    </TwoColumn>
+    </TextImagePair>
 
     <Spacer/>
 
     <!-- Undergrads. -->
-    <TwoColumn>
+    <TextImagePair>
         <div class="avatar-group -space-x-6 rtl:space-x-reverse" slot="graphics">
             <div class="avatar">
                 <div class="w-auto">
@@ -336,12 +374,12 @@ const automationImporter = new GraphicsImporter(
             <li>Kai Nylund (<a href="https://expd.uw.edu/mge/apply/research/">Mary Gates Scholar</a>)
             </li>
         </ul>
-    </TwoColumn>
+    </TextImagePair>
 
     <Spacer/>
 
     <!-- Open Source. -->
-    <TwoColumn>
+    <TextImagePair>
         <div class="card lg:card-side bg-base-200" slot="graphics">
             <figure class="max-w-sm">
                 <img src="https://repository-images.githubusercontent.com/439779355/697a35bd-3ae0-4fd1-b7c5-fb9471189739"
@@ -362,12 +400,12 @@ const automationImporter = new GraphicsImporter(
             submit changes.</h3>
         <p>The open nature of our code also ensures it will still be maintainable long after we achieve our
             main goals.</p>
-    </TwoColumn>
+    </TextImagePair>
 
     <Spacer/>
 
     <!-- Website. -->
-    <TwoColumn>
+    <TextImagePair>
         <div class="card lg:card-side bg-base-200" slot="graphics">
             <figure class="max-w-sm">
                 <img src="https://virtualbrainlab.org/_images/vbl-header.png"
@@ -385,12 +423,12 @@ const automationImporter = new GraphicsImporter(
 
         <h2>Learn more about our projects</h2>
         <p>See what else we've made and get in contact with us!</p>
-    </TwoColumn>
+    </TextImagePair>
 
     <Spacer/>
 
     <!-- What's next. -->
-    <TwoColumn>
+    <TextImagePair>
         <div class="card lg:card-side bg-base-200" slot="graphics">
             <figure class="max-w-sm">
                 <Image src={UfhTitle} alt="Unity for Humanity Pitch Deck Title Slide"/>
@@ -406,7 +444,7 @@ const automationImporter = new GraphicsImporter(
 
         <h2>What's next for Pinpoint</h2>
         <p>See our roadmap and goals for Pinpoint.</p>
-    </TwoColumn>
+    </TextImagePair>
 
     <Spacer/>
 
@@ -414,23 +452,13 @@ const automationImporter = new GraphicsImporter(
     <div class="hero">
         <div class="hero-content flex-col justify-center text-center p-0">
             <Article>
-                <Image src={MadeWithUnity} alt="Made with Unity"/>
+                <Image class="object-contain" src={MadeWithUnity} alt="Made with Unity"/>
                 <h2>Core Team:</h2>
             </Article>
 
             <br/>
 
-            <div class="flex space-x-8">
-                <a href="mailto:kjy5@uw.edu">
-                    <div class="avatar">
-                        <div class="w-48 rounded-full">
-                            <img src={Kenneth.src} alt="Kenneth J. Yang"/>
-                        </div>
-                    </div>
-                    <Article>
-                        <p><strong>Kenneth J. Yang</strong><br/>University of Washington</p>
-                    </Article>
-                </a>
+            <div class="flex flex-wrap flex-shrink gap-8 justify-center">
                 <a href="mailto:daniel.birman@alleninsitute.org">
                     <div class="avatar">
                         <div class="w-48 rounded-full">
@@ -438,7 +466,18 @@ const automationImporter = new GraphicsImporter(
                         </div>
                     </div>
                     <Article>
-                        <p><strong>Daniel Birman, PhD</strong><br/>Allen Institute</p>
+                        <p><strong>Daniel Birman, PhD</strong><br/>Software Engineer<br/>Allen Institute for Neural
+                            Dynamics</p>
+                    </Article>
+                </a>
+                <a href="mailto:kjy5@uw.edu">
+                    <div class="avatar">
+                        <div class="w-48 rounded-full">
+                            <img src={Kenneth.src} alt="Kenneth J. Yang"/>
+                        </div>
+                    </div>
+                    <Article>
+                        <p><strong>Kenneth J. Yang</strong><br/>University of Washington<br/>Computer Science ('25)</p>
                     </Article>
                 </a>
             </div>
