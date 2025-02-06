@@ -7,6 +7,9 @@ export default {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		extend: {
+			maxHeight: {
+				"1/2dvh": "50dvh",
+			},
 			height: {
 				"1/2dvh": "50dvh",
 				"1/3dvh": "33dvh",
