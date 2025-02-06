@@ -2,6 +2,7 @@
 import {Image} from "astro:assets";
 import Article from "../components/Article.astro";
 import HeroText from "../components/HeroText.astro";
+import TextCardPair from "../components/TextCardPair.astro";
 import TextImagePair from "../components/TextImagePair.astro";
 import TextVideoPair from "../components/TextVideoPair.astro";
 import Layout from "../layouts/Layout.astro";
@@ -28,6 +29,7 @@ import Kenneth from "../assets/people/kenneth.avif";
 import Qiqi from "../assets/people/qiqi.avif";
 import Selina from "../assets/people/selina.avif";
 
+import AutomationInsertion from "../assets/automation/0042.avif";
 import NeuropixelImage from "../assets/equipment/0000.avif";
 import Nanoject from "../assets/equipment/0024.avif";
 import Laser from "../assets/equipment/0046.avif";
@@ -35,7 +37,6 @@ import Pipette from "../assets/equipment/0068.avif";
 import Insertion from "../assets/insertion/0084.avif";
 import IntroSplash from "../assets/intro/0015.avif";
 import IntroFull from "../assets/intro/0079.avif";
-import AutomationInsertion from "../assets/automation/0042.avif"
 
 // Import graphics.
 const introImporter = new GraphicsImporter(
@@ -128,11 +129,19 @@ const automationImporter = new GraphicsImporter(
 
     <!-- Planning Phase. -->
 
-    <Spacer/>
+    <!-- Spacer for small screens. -->
+    <div class="lg:hidden">
+        <Spacer/>
+    </div>
+
     <HeroText>
         <h1 class="text-center">Plan Your Next Surgery with<br/><span class="text-primary">Pinpoint</span></h1>
     </HeroText>
-    <Spacer/>
+
+    <!-- Spacer for small screens. -->
+    <div class="lg:hidden">
+        <Spacer/>
+    </div>
 
     <!-- Simulate Equipment. -->
     <TextVideoPair>
@@ -186,12 +195,20 @@ const automationImporter = new GraphicsImporter(
 
     <!-- Automation Phase -->
 
-    <Spacer/>
+    <!-- Spacer for small screens. -->
+    <div class="lg:hidden">
+        <Spacer/>
+    </div>
+
     <HeroText>
         <h1 class="text-center">Run Your Plan with<br/><span class="text-primary">Pinpoint Automation</span>
         </h1>
     </HeroText>
-    <Spacer/>
+
+    <!-- Spacer for small screens. -->
+    <div class="lg:hidden">
+        <Spacer/>
+    </div>
 
     <TextVideoPair>
         <Graphics imageMetadatas={automationImporter.getImageMetadatas()}
@@ -379,7 +396,7 @@ const automationImporter = new GraphicsImporter(
     <Spacer/>
 
     <!-- Open Source. -->
-    <TextImagePair>
+    <TextCardPair>
         <div class="card lg:card-side bg-base-200" slot="graphics">
             <figure class="max-w-sm">
                 <img src="https://repository-images.githubusercontent.com/439779355/697a35bd-3ae0-4fd1-b7c5-fb9471189739"
@@ -400,12 +417,12 @@ const automationImporter = new GraphicsImporter(
             submit changes.</h3>
         <p>The open nature of our code also ensures it will still be maintainable long after we achieve our
             main goals.</p>
-    </TextImagePair>
+    </TextCardPair>
 
     <Spacer/>
 
     <!-- Website. -->
-    <TextImagePair>
+    <TextCardPair>
         <div class="card lg:card-side bg-base-200" slot="graphics">
             <figure class="max-w-sm">
                 <img src="https://virtualbrainlab.org/_images/vbl-header.png"
@@ -423,12 +440,12 @@ const automationImporter = new GraphicsImporter(
 
         <h2>Learn more about our projects</h2>
         <p>See what else we've made and get in contact with us!</p>
-    </TextImagePair>
+    </TextCardPair>
 
     <Spacer/>
 
     <!-- What's next. -->
-    <TextImagePair>
+    <TextCardPair>
         <div class="card lg:card-side bg-base-200" slot="graphics">
             <figure class="max-w-sm">
                 <Image src={UfhTitle} alt="Unity for Humanity Pitch Deck Title Slide"/>
@@ -444,7 +461,7 @@ const automationImporter = new GraphicsImporter(
 
         <h2>What's next for Pinpoint</h2>
         <p>See our roadmap and goals for Pinpoint.</p>
-    </TextImagePair>
+    </TextCardPair>
 
     <Spacer/>
 
@@ -477,7 +494,7 @@ const automationImporter = new GraphicsImporter(
                         </div>
                     </div>
                     <Article>
-                        <p><strong>Kenneth J. Yang</strong><br/>University of Washington<br/>Computer Science ('25)</p>
+                        <p><strong>Kenneth J. Yang</strong><br/>Computer Science<br/>University of Washington ('25)</p>
                     </Article>
                 </a>
             </div>
