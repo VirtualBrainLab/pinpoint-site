@@ -16,18 +16,18 @@ jobs:
 
     steps:
       - name: 🛎 Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.WORKFLOW_COMMIT }}
 
       - name: 🟨 Setup PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
         with:
           version: latest
 
       - name: 🟩 Setup Node.js and caching
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: latest
           cache: 'pnpm'
@@ -39,7 +39,7 @@ jobs:
         run: pnpm check
 
       - name: ✅ Commit code format changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "Format code"
           skip_fetch: true
